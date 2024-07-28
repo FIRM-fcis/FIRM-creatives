@@ -4,7 +4,7 @@ import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 const Navbar = ({setShowSign,handlesign }) => {
-  const x="LOGIN"
+  const x="LOGIN";
   return (
     <div className='navbar'>
         <img src={assets.logo} alt='Logo' draggable='false' className='logo'/>
