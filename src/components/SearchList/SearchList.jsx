@@ -12,4 +12,5 @@ const SearchList = ({results}) => {
   )
 }
 
+
 export default SearchList

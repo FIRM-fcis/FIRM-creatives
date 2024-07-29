@@ -11,6 +11,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     overflow-y:scroll;
+    
 }
 .search-list ul{
     list-style: none;

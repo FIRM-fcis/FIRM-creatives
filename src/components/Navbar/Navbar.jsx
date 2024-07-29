@@ -31,10 +31,11 @@ const Navbar = ({setShowSign,handleSign }) => {
   const handleBlur=()=>{
     setshowSearchList(false);
   }
+  
   return (
     <div className='navbar'>
         <Link to='/'><img src={assets.logo} alt='Logo' draggable='false' className='logo'/></Link>
-        <div className='search-box'  onFocus={handleFocus} onBlur={handleBlur}>
+        <div className='search-box' onFocus={handleFocus} onBlur={handleBlur} >
               <button className='btn-search'><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
               <input type="text" className='input-search' placeholder="Search" value={input}  onChange={(e)=>handlechange(e.target.value) }/>
               {
