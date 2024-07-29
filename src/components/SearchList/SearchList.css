@@ -1,0 +1,25 @@
+.search-list{
+    width: 100%;
+    background-color: #e74c3c;
+    max-height: 300px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-y:scroll;
+}
+.search-list ul{
+    list-style: none;
+}
+.search-list li{
+    padding: 8px 10px;
+    color: white;
+}
+.search-list li:hover{
+   background-color: #ac1100;
+   cursor: pointer;
+}

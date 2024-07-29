@@ -11,7 +11,6 @@
     display: flex;
     align-items: center;
     gap: 40px;
-
 }
 .navbar .login , .navbar .signup{
     font-size: 16px;
@@ -78,8 +77,8 @@
   background-color:transparent;
   pointer-events: painted;  
 }
-.btn-search:focus ~ .input-search ,.input-search:focus{
-  width: 25vw;
+.btn-search:focus ~ .input-search ,.input-search:focus {
+  width: 50vw;
   border-radius: 20px;
   border-bottom:1px solid rgba(255,255,255,.5);
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
@@ -94,8 +93,12 @@
     gap: 30px;
   }
   .navbar .login , .navbar .signup{
-    padding: 8px 25px;
+    padding: 10px 25px;
   }
+  .btn-search:focus ~ .input-search ,.input-search:focus{
+    width: 40vw;
+  }
+
 }
 @media (max-width:900px) {
   .navbar .logo{
@@ -105,7 +108,22 @@
     gap: 20px;
   }
   .navbar .login , .navbar .signup{
-    padding: 7px 20px;
+    padding: 8px 20px;
+  }
+  .btn-search:focus ~ .input-search ,.input-search:focus{
+    width: 35vw;
+  }
+  .input-search{
+    height: 46px;
+    width: 46px;
+    border-radius: 23px;
+    padding-right: 36px;
+  }
+  .btn-search{
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+    border-radius: 50%; 
   }
 }
 @media (max-width:750px) {
@@ -116,13 +134,41 @@
     gap: 7px;
   }
   .navbar .login , .navbar .signup{
-    padding: 5px 12px;
+    padding: 7px 12px;
   }
   .btn-search:focus ~ .input-search ,.input-search:focus{
-    padding-left: 10px;
+    padding-left: 8px;
     width: 30vw;
   }
   .input-search::placeholder{
+    font-size: 14px;
+  }
+  .input-search{
+    height: 40px;
+    width: 40px;
     font-size: 16px;
+    border-radius: 20px;
+    padding-right: 30px;
+  }
+  .btn-search{
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 50%; 
+  }
+}
+@media (max-width:350px) {
+  .navbar .logo{
+    width: 25px;
+  }
+  .navbar-right{
+    gap: 5px;
+  }
+  .navbar .login , .navbar .signup{
+    padding: 6px 12px;
+  }
+  .btn-search:focus ~ .input-search ,.input-search:focus{
+    padding-left: 8px;
+    width: 28vw;
   }
 }

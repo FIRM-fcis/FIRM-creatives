@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css'
-const Login = ({setShowSign,sign,handlesign}) => {
+const Login = ({setShowSign,sign,handleSign}) => {
 
   return (
     <div className='log-in'>
@@ -30,8 +30,8 @@ const Login = ({setShowSign,sign,handlesign}) => {
     	</div>
         }
     {sign==="LOGIN"?
-     <p>Create a new account? <span className='switch' onClick={()=>handlesign("SIGN UP")}>Click here</span></p>
-     : <p>Already have an account? <span className='switch' onClick={()=>handlesign("LOGIN")}>Login here</span></p>
+     <p>Create a new account? <span className='switch' onClick={()=>handleSign("SIGN UP")}>Click here</span></p>
+     : <p>Already have an account? <span className='switch' onClick={()=>handleSign("LOGIN")}>Login here</span></p>
         
     }
   
