@@ -1,0 +1,45 @@
+:root{
+    --main-color: #DEE2E6;
+    --second-color:#DC3545;
+    --dark-color:#191919;
+    --transition:0.5s ease;
+}
+
+html{
+    cursor: default;
+}
+
+.hover-color-change{
+    transition: var(--transition);
+}
+.hover-color-change:hover{
+    color: var(--second-color) !important;
+}
+
+
+
+.main-color{
+    color: var(--main-color) !important;
+}
+
+.bg-main-color{
+    background-color: var(--main-color) !important;
+}
+
+
+.second-color{
+    color: var(--second-color) !important;
+}
+
+.bg-second-color{
+    background-color: var(--second-color) !important;
+}
+
+.dark-color{
+    color: var(--dark-color) !important;
+}
+
+.bg-dark-color{
+    background-color: var(--dark-color) !important;
+}
+
