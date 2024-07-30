@@ -31,7 +31,6 @@ const Navbar = ({setShowSign,handleSign }) => {
   const handleBlur=()=>{
     setshowSearchList(false);
   }
-  
   return (
     <div className='navbar'>
         <Link to='/'><img src={assets.logo} alt='Logo' draggable='false' className='logo'/></Link>
