@@ -89,3 +89,13 @@
     font-size: 18px;
     color: green;
 }
+@media (max-width:1300px) {
+    .login-container{
+        padding: 30px 18px;
+    }
+}
+@media (max-width:750px) {
+.login-container{
+    padding: 30px 15px;
+}
+}
