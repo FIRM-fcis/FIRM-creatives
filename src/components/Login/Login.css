@@ -99,3 +99,25 @@
     padding: 30px 15px;
 }
 }
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.forgot-password-container {
+  text-align: right;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color:#e74c3c ;
+  text-decoration: none;
+}
+
+.forgot-password-container:hover {
+  text-decoration: underline;
+}
