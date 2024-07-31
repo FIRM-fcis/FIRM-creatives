@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+import ExpressMongoSanitize from "express-mongo-sanitize";
+import xss from "xss-clean";
+import helmet from "helmet";
 import connectDB from "./src/DB/config.js";
 import userRouter from "./src/routes/user.js";
 import authRouter from "./src/routes/auth.js";
@@ -12,7 +15,17 @@ dotenv.config();
 // Create a new express application
 const app = express();
 
+// The request handler must be the first middleware on the app
 app.use(express.json());
+
+// Set security HTTP headers
+app.use(helmet());
+
+// Data sanitization against NoSQL query injection
+app.use(ExpressMongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
 
 const baseUrl = process.env.BASE_URL;
 

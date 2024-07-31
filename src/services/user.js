@@ -6,7 +6,7 @@ export const getAllUsers = async () => {
 
   // return the users without the password field
   return users.map((user) => {
-    const { password, ...rest } = user._doc;
+    const { password, emailVerificationToken, emailVerified, ...rest } = user._doc;
     return rest;
   });
 };
@@ -28,7 +28,7 @@ export const getUserById = async (userId) => {
   }
 
   // return the user without the password field
-  const { password, ...rest } = user._doc;
+  const { password, emailVerificationToken, emailVerified, ...rest } = user._doc;
 
   return rest;
 };

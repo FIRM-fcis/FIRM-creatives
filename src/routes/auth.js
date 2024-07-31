@@ -11,4 +11,7 @@ router.post("/signup", validate(userSchemas.signUpSchema), authController.signUp
 // route to login a user
 router.post("/login", validate(userSchemas.loginSchema), authController.loginUser);
 
+// route to verify the email
+router.get("/verify/:token", authController.verifyEmail);
+
 export default router;

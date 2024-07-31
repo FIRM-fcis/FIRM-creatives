@@ -56,6 +56,14 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
+  emailVerificationToken: {
+    type: String,
+    default: null,
+  },
 });
 
 // Create a model for the user schema
