@@ -3,10 +3,10 @@ import * as authService from "../services/auth.js";
 export const signUpUser = async (req, res, next) => {
     try {
         const userData = req.body;
-        const newUser = await authService.signUpUser(userData);
+        const newUser = await authService.signUpUser(userData, req);
 
         return res.status(201).json({
-            message: "User signed up successfully",
+            message: "User signed up successfully, please check your email to verify your account",
             body: newUser,
             status: 201,
         });
