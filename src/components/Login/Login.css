@@ -63,7 +63,6 @@
 	background-color:#e74c3c;
 	outline: none;
     border: 0;
-    color: #fff;
 	padding:10px 20px;
 	text-transform:uppercase;
 	margin-top:20px;
@@ -75,8 +74,8 @@
 .login-btn:hover{
     background-color: #ac1100;
 }
-.input-container input:focus ~ label,
-.input-container input:valid ~ label{
+.input-container input:focus ~ .info-label,
+.input-container input:valid ~ .info-label{
 	top:-12px;
 	font-size:12px;
 }

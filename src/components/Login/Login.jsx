@@ -3,7 +3,7 @@ import './Login.css'
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-const Login = ({ setShowSign, sign, handleSign }) => {
+const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
     const [formData, setformData] = useState({
         username: '',
         email: '',
@@ -60,6 +60,13 @@ const Login = ({ setShowSign, sign, handleSign }) => {
         if (Object.keys(validationErrors).length === 0 && isCaptchaVerified) {
             // setemailVerfication('Signup successful! Please check your email for verification.');
             // setIsSubmitting(true); 
+            setShowSign(false)
+            if(sign === "LOGIN"){
+                navigate('/home');
+               }
+               else{
+                setinfoPage(true)
+               }
             try {
                 const url = sign === 'SIGN UP'? `${API_BASE_URL}/api/auth/signup` :`${API_BASE_URL}/api/auth/login`;
                 const response = await axios.post(url, formData, {
@@ -72,8 +79,9 @@ const Login = ({ setShowSign, sign, handleSign }) => {
                   }
                     console.log(`${sign} successful!`, response.data);
                     setemailVerfication('Signup successful! Please check your email for verification.');
+                   
                     setIsFormCleared(true);
-                    navigate('/home');
+               
                     setformData({
                         username: '',
                         email: '',
@@ -112,9 +120,7 @@ const Login = ({ setShowSign, sign, handleSign }) => {
                 Authorization: `Bearer ${storedToken}`,
               },
             });
-            // Handle successful authentication (e.g., redirect to dashboard)
           } catch (error) {
-            // Handle authentication error (e.g., clear token, redirect to login)
             console.error('Authentication error:', error);
             localStorage.removeItem('authToken');
           }
@@ -155,28 +161,28 @@ const Login = ({ setShowSign, sign, handleSign }) => {
                 {sign === "LOGIN" ? <></>
                     : <div className='input-container'>
                         <input type="text" required name='username' value={isFormCleared ? '' : formData.username} onChange={handlechange} />
-                        <label>UserName</label>
+                        <label className='info-label'>UserName</label>
                         {errors.username && <span>{errors.username}</span>}
                     </div>
                 }
                 <div className='input-container'>
                     <input type="email" required name='email' value={isFormCleared ? '' : formData.email} onChange={handlechange} />
-                    <label>Email</label>
+                    <label className='info-label'>Email</label>
                     {errors.email && <span>{errors.email}</span>}
                 </div>
                 <div className='input-container'>
                     <input type="password" required name='password' value={isFormCleared ? '' : formData.password} onChange={handlechange} />
-                    <label>Password</label>
+                    <label className='info-label'>Password</label>
                     {errors.password && <span>{errors.password}</span>}
                 </div>
                 {sign === "LOGIN" ?
                     <div className='checkbox'>
                         <input type="checkbox" className='rememberMe' checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
-                        <label >Remember Me</label>
+                        <label className='info-label'>Remember Me</label>
                     </div>
                     : <div className='input-container'>
                         <input type="password" required name='confirmPassword' value={isFormCleared ? '' : formData.confirmPassword} onChange={handlechange} />
-                        <label>Confirm Password</label>
+                        <label className='info-label'>Confirm Password</label>
                         {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
                     </div>
                 }

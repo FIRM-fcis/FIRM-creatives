@@ -3,19 +3,25 @@ import Navbar from './components/Navbar/Navbar'
 import Login from './components/Login/Login'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home'
-import HomeAfterLogin from './components/HomeAfterLogin/HomeAfterLogin'
 import ForgetPassword from './components/ForgetPassword/ForgetPassword'
+import HomeAfterLogin from './pages/HomeAfterLogin/HomeAfterLogin'
+import InformationPage from './components/InformationPage/InformationPage'
 
 const App = () => {
   const [showSign,setShowSign]=useState(false)
   const [sign,setsign]=useState("")
+  const[infoPage,setinfoPage]=useState(false);
+
   const handleSign=(x)=>{
     setsign(x);
   }
-  
+  const handleInfoPage=(y)=>{
+    setinfoPage(y);
+  }
   return (
     <>
-    {showSign?<Login setShowSign={setShowSign} sign={sign} handleSign={handleSign}/>:<></>}
+    {showSign?<Login setShowSign={setShowSign} sign={sign} handleSign={handleSign} setinfoPage={setinfoPage}/>:<></>}
+    {infoPage?<InformationPage handleInfoPage={handleInfoPage}/>:<></>}
        <div className='app'>
          <Navbar setShowSign={setShowSign} handleSign={handleSign}/>
          <Routes>
