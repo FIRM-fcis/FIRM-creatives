@@ -1,44 +1,51 @@
-:root{
-    --main-color: #FFFFFF;
-    --second-color:#E74C3C;
-    --dark-color:#191919;
-    --transition:0.5s ease;
+:root {
+  --main-color: #ffffff;
+  --second-color: #e74c3c;
+  --dark-color: #191919;
+  --transition: 0.5s ease;
 }
 
-html{
-    cursor: default;
+html,
+body {
+  height: 100%;
+  cursor: default;
 }
 
-.hover-color-change{
-    transition: var(--transition);
+.d-flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.hover-color-change:hover{
-    color: var(--second-color) !important;
+.hv-100{
+    height: 100vh;
 }
-
-
-
-.main-color{
-    color: var(--main-color) !important;
+.hover-color-change {
+  transition: var(--transition);
 }
-
-.bg-main-color{
-    background-color: var(--main-color) !important;
+.hover-color-change:hover {
+  color: var(--second-color) !important;
 }
 
-
-.second-color{
-    color: var(--second-color) !important;
+.main-color {
+  color: var(--main-color) !important;
 }
 
-.bg-second-color{
-    background-color: var(--second-color) !important;
+.bg-main-color {
+  background-color: var(--main-color) !important;
 }
 
-.dark-color{
-    color: var(--dark-color) !important;
+.second-color {
+  color: var(--second-color) !important;
 }
 
-.bg-dark-color{
-    background-color: var(--dark-color) !important;
+.bg-second-color {
+  background-color: var(--second-color) !important;
+}
+
+.dark-color {
+  color: var(--dark-color) !important;
+}
+
+.bg-dark-color {
+  background-color: var(--dark-color) !important;
 }
