@@ -7,7 +7,7 @@ const handelProjectDetails = (id)=>{
 const Project = ({ project }) => {
   return (
     <div
-      className="p-0 bg-second-color project col-12 col-sm-6 col-md-4 col-lg-2 cursor-pointer"
+      className="p-1 project col-12 col-sm-6 col-md-4 col-lg-2 cursor-pointer"
       onClick={() => {
         handelProjectDetails(project.id);
       }}
