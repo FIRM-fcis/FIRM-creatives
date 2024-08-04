@@ -1,8 +1,17 @@
 import React from "react";
 import "./Project.css";
+
+const handelProjectDetails = (id)=>{
+  console.log(id);
+}
 const Project = ({ project }) => {
   return (
-    <div className="p-0 bg-second-color project col-12 col-sm-6 col-md-4 col-lg-2">
+    <div
+      className="p-0 bg-second-color project col-12 col-sm-6 col-md-4 col-lg-2 cursor-pointer"
+      onClick={() => {
+        handelProjectDetails(project.id);
+      }}
+    >
       <div className="project-container position-relative">
         <div
           className="project-bg-image position-absolute w-100 h-100"

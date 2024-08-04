@@ -18,6 +18,7 @@ const App = () => {
       image:
         "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
       likes: 123,
+      id:1,
     },
     {
       userName: "meefr",
@@ -26,6 +27,7 @@ const App = () => {
       image:
         "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
       likes: 123,
+      id:2,
     },
   ]);
   const [showSign,setShowSign]=useState(false)
