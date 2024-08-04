@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import ForgetPassword from './components/ForgetPassword/ForgetPassword'
 import HomeAfterLogin from './pages/HomeAfterLogin/HomeAfterLogin'
 import InformationPage from './components/InformationPage/InformationPage'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
   const [showSign,setShowSign]=useState(false)
@@ -30,6 +31,9 @@ const App = () => {
           <Route path='/forgetPassword' element={<ForgetPassword/>}/>
          </Routes>
        </div>
+
+
+       <Footer />
     </>
  
   )
