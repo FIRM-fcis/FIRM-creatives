@@ -20,6 +20,8 @@
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
+    "mongoose-aggregate-paginate-v2": "^1.1.2",
+    "mongoose-paginate-v2": "^1.8.3",
     "nodemailer": "^6.9.14",
     "xss-clean": "^0.1.4"
   },
