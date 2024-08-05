@@ -1,5 +1,2 @@
 ## Features of this module
-
-- User registration [DONE with validation]
-- User login [DONE with validation]
-- User profile management
+- Postman Docs: https://documenter.getpostman.com/view/32763635/2sA3rxpYsT
