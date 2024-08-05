@@ -7,7 +7,7 @@ export const signUpUser = async (req, res, next) => {
 
         return res.status(201).json({
             message: "User signed up successfully, please check your email to verify your account",
-            body: newUser,
+            body: newUser ? newUser : null,
             status: 201,
         });
     } catch (error) {
@@ -39,6 +39,7 @@ export const verifyEmail = async (req, res, next) => {
 
         return res.status(200).json({
             message: "Email verified successfully",
+            body: null,
             status: 200,
         });
     } catch (error) {

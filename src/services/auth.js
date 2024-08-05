@@ -14,7 +14,7 @@ export const signUpUser = async (userData, req) => {
     });
 
     if (foundUser) {
-        throw createCustomError("User already exists", 400);
+        throw createCustomError("User already exists", 400, null);
     }
 
     // hash the password
@@ -156,7 +156,7 @@ export const verifyEmail = async (token) => {
     });
 
     if (!foundUser) {
-        throw createCustomError("User not found", 400);
+        throw createCustomError("User not found", 400, null);
     }
 
     // update the emailVerified field

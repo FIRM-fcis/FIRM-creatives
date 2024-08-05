@@ -6,6 +6,6 @@ export class CustomError extends Error {
   }
 }
 
-export function createCustomError(message, statusCode, body) {
+export function createCustomError(message, statusCode, body = null) {
   return new CustomError(message, statusCode, body);
 }

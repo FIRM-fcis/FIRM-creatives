@@ -2,13 +2,10 @@ import User from "../DB/models/user.js";
 import { createCustomError } from "../middlewares/errors/customError.js";
 
 export const getAllUsers = async () => {
-  const users = await User.find();
+  const users = await User.find({}, { __v: false, password: false, emailVerificationToken: false, emailVerified: false });
 
   // return the users without the password field
-  return users.map((user) => {
-    const { password, emailVerificationToken, emailVerified, ...rest } = user._doc;
-    return rest;
-  });
+  return users;
 };
 
 export const getUserById = async (userId) => {
@@ -18,17 +15,15 @@ export const getUserById = async (userId) => {
     !(userId instanceof Uint8Array) &&
     isNaN(userId)
   ) {
-    throw createCustomError("Invalid user id", 400);
+    throw createCustomError("Invalid user id", 400, null);
   }
 
-  const user = await User.findById(userId);
+  const user = await User.find({ _id: userId }, { __v: false, password: false, emailVerificationToken: false, emailVerified: false });
 
   if (!user) {
-    throw createCustomError("User not found", 404);
+    throw createCustomError("User not found", 404, null);
   }
 
   // return the user without the password field
-  const { password, emailVerificationToken, emailVerified, ...rest } = user._doc;
-
-  return rest;
+  return user;
 };
