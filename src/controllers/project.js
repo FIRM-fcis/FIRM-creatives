@@ -53,3 +53,16 @@ export const updateProject = async (req, res) => {
         res.status(400).json(createCustomError(error));
     }
 }
+
+export const deleteProject = async (req, res) => {
+    try {
+        const project = await prjectServices.deleteProject(req.params.projectID);
+        return res.status(200).json({
+        message: "Project deleted successfully",
+        body: project,
+        status: 200,
+        });
+    } catch (error) {
+        res.status(400).json(createCustomError(error));
+    }
+}

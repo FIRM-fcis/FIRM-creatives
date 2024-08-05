@@ -73,8 +73,21 @@ const updateProject = async (projectID, projectData, res, next) => {
     }
 }
 
+const deleteProject = async (projectID, res, next) => {
+    try {
+        const project = await ProjectSchema.findOne({ projectID });
+        if (!project) {
+            return res.status(404).json(createCustomError('Project not found'));
+        }
+        await project.remove();
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     createProject,
     getProjectById,
-    updateProject
+    updateProject,
+    deleteProject
 }
