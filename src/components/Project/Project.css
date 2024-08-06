@@ -1,0 +1,69 @@
+@import '../../Shares/main.css';
+/* .user-img{
+    border-radius: 50%;
+    border: 1px solid red;
+    width: 50px;
+} */
+.project-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Maintain a square aspect ratio */
+  overflow: hidden;
+}
+
+.project-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1; /* Ensure it is above the background image */
+}
+
+.user-info {
+  position: absolute;
+  bottom: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  z-index: 2; /* Ensure this is above the overlay */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.user-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid white;
+}
+
+.user-info p {
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.project-container:hover .overlay {
+  opacity: 0.5; /* Show the overlay with 0.5 opacity on hover */
+}
+
+.project-container:hover .user-info {
+  opacity: 1; /* Show the user image and name on hover */
+}
