@@ -11,6 +11,12 @@ body {
   cursor: default;
 }
 
+.window-height{
+  height: 100vh;
+}
+.t-center{
+  text-align: center;
+}
 .cursor-pointer{
     cursor: pointer;
 }

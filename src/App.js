@@ -8,6 +8,7 @@ import HomeAfterLogin from './pages/HomeAfterLogin/HomeAfterLogin'
 import InformationPage from './components/InformationPage/InformationPage'
 import Footer from './components/Footer/Footer'
 import ProjectManger from './components/ProjectManger/ProjectManger'
+import AddProject from './pages/AddProject/AddProject'
 
 const App = () => {
   const [projects, setProjects] = useState([
