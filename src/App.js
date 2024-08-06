@@ -65,6 +65,7 @@ const App = () => {
       </div>
 
       <ProjectManger projects={projects}/>
+      {/* <AddProject/> */}
       <Footer />
     </>
   );
