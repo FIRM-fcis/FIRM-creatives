@@ -1,7 +1,7 @@
 import React from "react";
 import "./StartBuildingProject.css";
-import { handleDescriptionChange, handleImageUpload, handleTagsChange, handleTitleChange, handleToolsChange, handleVideoUpload } from "../../Shares/handelInputs";
-const StartBuildingProject = ({project,setProject}) => {
+import { handelFunctions } from "../../Shares/handelInputs";
+const StartBuildingProject = ({ project, setProject }) => {
   return (
     <div className="d-flex-center flex-column window-height">
       <p className="display-6 py-2">Start building your project:</p>
@@ -14,7 +14,9 @@ const StartBuildingProject = ({project,setProject}) => {
               type="file"
               accept="image/*"
               className="d-none"
-              onChange={(event) => handleImageUpload(event, () => {})}
+              onChange={(event) =>
+                handelFunctions.handleImageUpload(event, setProject, project)
+              }
             />
           </label>
         </div>
@@ -26,7 +28,9 @@ const StartBuildingProject = ({project,setProject}) => {
               type="file"
               accept="video/*"
               className="d-none"
-              onChange={(event) => handleVideoUpload(event, () => {})}
+              onChange={(event) =>
+                handelFunctions.handleVideoUpload(event, setProject, project)
+              }
             />
           </label>
         </div>
@@ -38,7 +42,9 @@ const StartBuildingProject = ({project,setProject}) => {
               type="text"
               placeholder="Enter Title"
               className="d-none"
-              onChange={(event) => handleTitleChange(event, () => {})}
+              onChange={(event) =>
+                handelFunctions.handleTitleChange(event, setProject, project)
+              }
             />
           </label>
         </div>
@@ -49,7 +55,13 @@ const StartBuildingProject = ({project,setProject}) => {
             <textarea
               placeholder="Enter Description"
               className="d-none"
-              onChange={(event) => handleDescriptionChange(event, () => {})}
+              onChange={(event) =>
+                handelFunctions.handleDescriptionChange(
+                  event,
+                  setProject,
+                  project
+                )
+              }
             />
           </label>
         </div>
@@ -61,7 +73,9 @@ const StartBuildingProject = ({project,setProject}) => {
               type="text"
               placeholder="Enter Tools"
               className="d-none"
-              onChange={(event) => handleToolsChange(event, () => {})}
+              onChange={(event) =>
+                handelFunctions.handleToolsChange(event, setProject, project)
+              }
             />
           </label>
         </div>
@@ -73,7 +87,9 @@ const StartBuildingProject = ({project,setProject}) => {
               type="text"
               placeholder="Enter Tags"
               className="d-none"
-              onChange={(event) => handleTagsChange(event, ()=>{})}
+              onChange={(event) =>
+                handelFunctions.handleTagsChange(event, setProject, project)
+              }
             />
           </label>
         </div>

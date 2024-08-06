@@ -15,7 +15,7 @@ const AddProject = () => {
   });
   return (
     <div className="container t-center hv-100">
-      <div className="row hv-100 d-flex py-5 align-items-start box-border">
+      <div className="row hv-100 d-flex py-5 align-items-start ">
         <div className="col-10 hv-100">
           <div className="overflow-custom hv-90">
             {project.images.length > 0 ||
