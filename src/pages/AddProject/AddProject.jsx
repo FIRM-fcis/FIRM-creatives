@@ -22,7 +22,7 @@ const AddProject = () => {
             project.videos.length > 0 ||
             project.title ||
             project.description ? (
-              <BuildingProject project={project} />
+              <BuildingProject project={project} setProject={setProject} />
             ) : (
               <StartBuildingProject project={project} setProject={setProject} />
             )}
