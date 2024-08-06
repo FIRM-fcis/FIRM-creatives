@@ -14,6 +14,8 @@ const App = () => {
   const [projects, setProjects] = useState([
     {
       userName: "meefr",
+      videos:[],
+      imgs:[],
       userImage:
         "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
       image:
@@ -64,8 +66,8 @@ const App = () => {
         </Routes>
       </div>
 
-      <ProjectManger projects={projects}/>
-      {/* <AddProject/> */}
+      {/* <ProjectManger projects={projects}/> */}
+      <AddProject project={[]}/>
       <Footer />
     </>
   );

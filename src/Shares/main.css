@@ -11,9 +11,7 @@ body {
   cursor: default;
 }
 
-.window-height{
-  height: 100vh;
-}
+
 .t-center{
   text-align: center;
 }
@@ -27,6 +25,9 @@ body {
 }
 .hv-100{
     height: 100vh;
+}
+.hv-90{
+  height: 90vh;
 }
 .hover-color-change {
   transition: var(--transition);
@@ -57,4 +58,35 @@ body {
 
 .bg-dark-color {
   background-color: var(--dark-color) !important;
+}
+
+
+.overflow-custom {
+  overflow: auto; /* Ensure scrolling is enabled */
+  scrollbar-width: thin; /* Firefox: Thin scrollbar */
+  scrollbar-color: transparent transparent; /* Firefox: Transparent scrollbar by default */
+}
+
+.overflow-custom::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  background-color: transparent; /* Initial transparent background */
+}
+
+.overflow-custom::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Initial transparent scrollbar thumb */
+}
+
+.overflow-custom:hover::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0.1); /* Scrollbar background color on hover */
+}
+
+.overflow-custom:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Scrollbar thumb color on hover */
+  border-radius: 4px; /* Rounded scrollbar thumb */
+}
+
+/* Firefox support */
+.overflow-custom:hover {
+  scrollbar-width: thin; /* Firefox: Thin scrollbar on hover */
+  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1); /* Firefox: Thumb and track color on hover */
 }

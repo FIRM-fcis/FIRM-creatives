@@ -1,7 +1,7 @@
 import React from "react";
 import "./StartBuildingProject.css";
 import { handleDescriptionChange, handleImageUpload, handleTagsChange, handleTitleChange, handleToolsChange, handleVideoUpload } from "../../Shares/handelInputs";
-const StartBuildingProject = () => {
+const StartBuildingProject = ({project,setProject}) => {
   return (
     <div className="d-flex-center flex-column window-height">
       <p className="display-6 py-2">Start building your project:</p>
