@@ -8,7 +8,6 @@ import {
   handleToolsChange,
   handleVideoUpload,
 } from "../../Shares/handelInputs";
-
 const AddContent = ({ project, setProject }) => {
   return (
     <div className="sidebar">
@@ -36,47 +35,36 @@ const AddContent = ({ project, setProject }) => {
           />
         </label>
 
-        <label className="hover-color-change option cursor-pointer">
+        <label
+          className="hover-color-change option cursor-pointer"
+          onClick={() => handleTitleChange(setProject, project)}
+        >
           <i className="fa-solid fa-heading"></i>
           <span>Title</span>
-          <input
-            type="text"
-            placeholder="Enter Title"
-            className="d-none"
-            onChange={(event) => handleTitleChange(event, setProject, project)}
-          />
         </label>
 
-        <label className="option hover-color-change cursor-pointer">
+        <label
+          className="option hover-color-change cursor-pointer"
+          onClick={() => handleDescriptionChange(setProject, project)}
+        >
           <i className="fa-solid fa-note-sticky"></i>
           <span>Description</span>
-          <textarea
-            placeholder="Enter Description"
-            className="d-none"
-            onChange={(event) => handleDescriptionChange(event, setProject, project)}
-          />
         </label>
 
-        <label className="option hover-color-change cursor-pointer">
+        <label
+          className="option hover-color-change cursor-pointer"
+          onClick={() => handleToolsChange(setProject, project)}
+        >
           <i className="fa-solid fa-gear"></i>
           <span>Tools</span>
-          <input
-            type="text"
-            placeholder="Enter Tools"
-            className="d-none"
-            onChange={(event) => handleToolsChange(event, setProject, project)}
-          />
         </label>
 
-        <label className="option hover-color-change cursor-pointer">
+        <label
+          className="option hover-color-change cursor-pointer"
+          onClick={() => handleTagsChange(setProject,project)}
+        >
           <i className="fa-solid fa-tags"></i>
           <span>Tags</span>
-          <input
-            type="text"
-            placeholder="Enter Tags"
-            className="d-none"
-            onChange={(event) => handleTagsChange(event, setProject, project)}
-          />
         </label>
       </div>
     </div>

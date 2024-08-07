@@ -7,17 +7,17 @@ const handelProjectDetails = (id)=>{
 const Project = ({ project }) => {
   return (
     <div
-      className="p-1 project col-12 col-sm-6 col-md-4 col-lg-2 cursor-pointer"
+      className="py-2 project col-12 col-sm-6 col-md-4 col-lg-3 cursor-pointer"
       onClick={() => {
         handelProjectDetails(project.id);
       }}
     >
-      <div className="project-container position-relative">
+      <div className="project-container">
         <div
-          className="project-bg-image position-absolute w-100 h-100"
-          style={{ backgroundImage: `url(${project.image})` }}
+          className="project-bg-image position-absolute"
+          style={{ backgroundImage: `url(${project.images[0]})` }}
         />
-        <div className="overlay position-absolute w-100 h-100 bg-second-color"></div>
+        <div className="overlay position-absolute bg-second-color"></div>
         <div className="user-info d-flex justify-content-between align-items-center position-absolute w-100">
           <div className="d-flex-center">
             <img src={project.userImage} alt="User" className="user-img" />

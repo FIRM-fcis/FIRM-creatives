@@ -4,11 +4,13 @@
     border: 1px solid red;
     width: 50px;
 } */
+
 .project-container {
   position: relative;
-  width: 100%;
-  padding-top: 100%; /* Maintain a square aspect ratio */
+  width: 100%; /* Set the width to 110% of the height */
+  padding-bottom: 90%; /* Maintain aspect ratio based on height */
   overflow: hidden;
+
 }
 
 .project-bg-image {
@@ -16,19 +18,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0;
 }
+
 
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   z-index: 1; /* Ensure it is above the background image */
@@ -36,7 +37,7 @@
 
 .user-info {
   position: absolute;
-  bottom: 10px;
+  bottom: 30px;
   padding: 10px;
   display: flex;
   align-items: center;

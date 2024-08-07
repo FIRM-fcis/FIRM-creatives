@@ -9,28 +9,69 @@ import InformationPage from './components/InformationPage/InformationPage'
 import Footer from './components/Footer/Footer'
 import ProjectManger from './components/ProjectManger/ProjectManger'
 import AddProject from './pages/AddProject/AddProject'
+import AddOrEdditProject from './pages/AddProject/AddProject'
 
 const App = () => {
   const [projects, setProjects] = useState([
     {
-      userName: "meefr",
-      videos:[],
-      imgs:[],
-      userImage:
-        "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
-      image:
-        "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
-      likes: 123,
-      id:1,
+      title: "",
+      description: "",
+      tools: [],
+      tages: [],
+      openToBeSaved: false,
+      images: [
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
+      ],
+      videos: [],
+      ownerId: "",
     },
     {
-      userName: "meefr",
-      userImage:
-        "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
-      image:
-        "https://mir-s3-cdn-cf.behance.net/projects/202_webp/f8d315204054109.Y3JvcCwxNDQ0LDExMjksMCw0ODY.jpg",
-      likes: 123,
-      id:2,
+      title: "",
+      description: "",
+      tools: [],
+      tages: [],
+      openToBeSaved: false,
+      images: [
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
+      ],
+      videos: [],
+      ownerId: "",
+    },
+    {
+      title: "",
+      description: "",
+      tools: [],
+      tages: [],
+      openToBeSaved: false,
+      images: [
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
+      ],
+      videos: [],
+      ownerId: "",
+    },
+    {
+      title: "",
+      description: "",
+      tools: [],
+      tages: [],
+      openToBeSaved: false,
+      images: [
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
+      ],
+      videos: [],
+      ownerId: "",
+    },
+    {
+      title: "",
+      description: "",
+      tools: [],
+      tages: [],
+      openToBeSaved: false,
+      images: [
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
+      ],
+      videos: [],
+      ownerId: "",
     },
   ]);
   const [showSign,setShowSign]=useState(false)
@@ -66,9 +107,9 @@ const App = () => {
         </Routes>
       </div>
 
-      {/* <ProjectManger projects={projects}/> */}
-      <AddProject project={[]}/>
-      <Footer />
+      <ProjectManger projects={projects}/>
+      {/* <AddOrEdditProject project={[]} /> */}
+      {/* <Footer /> */}
     </>
   );
 }

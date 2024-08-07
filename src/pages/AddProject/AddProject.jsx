@@ -4,7 +4,7 @@ import AddContent from "../../components/AddContent/AddContent";
 import StartBuildingProject from "../../components/StartBuildingProject/StartBuildingProject";
 import BuildingProject from "../../components/BuildingProject/BuildingProject";
 
-const AddProject = () => {
+const AddOrEdditProject = () => {
   const [project, setProject] = useState({
     images: [],
     videos: [],
@@ -36,4 +36,4 @@ const AddProject = () => {
   );
 };
 
-export default AddProject;
+export default AddOrEdditProject;
