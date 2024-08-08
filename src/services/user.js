@@ -9,6 +9,7 @@ export const getAllUsers = async () => {
 };
 
 export const getUserById = async (userId, comingId) => {
+
   // check if the userId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
   if (userId.length !== 24 && !(userId instanceof Uint8Array) && isNaN(userId)) {
     throw createCustomError("Invalid user id", 400, null);

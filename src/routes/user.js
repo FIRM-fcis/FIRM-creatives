@@ -11,3 +11,4 @@ router.get("/", authorize, userController.getAllUsers);
 router.get("/:userId", authorize, userController.getUserById);
 
 export default router;
+

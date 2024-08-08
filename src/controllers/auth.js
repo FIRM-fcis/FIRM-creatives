@@ -34,6 +34,7 @@ export const loginUser = async (req, res, next) => {
 
 export const verifyEmail = async (req, res, next) => {
     try {
+
         const token = req.params.token;
         await authService.verifyEmail(token);
 

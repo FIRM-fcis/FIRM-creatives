@@ -18,6 +18,7 @@ const authorize = async (req, res, next) => {
         // verify the token
         let token = req.headers.authorization.split(" ")[1];
         let tokenData;
+
         try {
             tokenData = verifyAccessToken(token);
         } catch (err) {

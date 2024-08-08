@@ -175,4 +175,5 @@ export const verifyEmail = async (token) => {
 
     // save the user to the database
     await foundUser.save();
+
 }
