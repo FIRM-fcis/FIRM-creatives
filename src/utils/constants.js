@@ -1,4 +1,5 @@
-const tags = //project tags 
+// Tags and tools constants
+export const tags =
 {
     frontend: 'Frontend',
     backend: 'Backend',
@@ -25,7 +26,7 @@ const tags = //project tags
     robotics: 'Robotics',
 }
 
-const tools = //project tools
+export const tools =
 {
     other: 'Other',
     nodejs: 'Node.js',
@@ -61,9 +62,4 @@ const tools = //project tools
     gitlab: 'GitLab',
     github: 'GitHub',
     selenium: 'Selenium',
-}
-
-module.exports = {
-    tags,
-    tools
 }

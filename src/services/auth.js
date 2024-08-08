@@ -20,7 +20,7 @@ export const signUpUser = async (userData, req) => {
     // hash the password
     const hashedPassword = await hashingOperations.hashPassword(password);
 
-    // create verification token
+    // create one-use token and should immediately get revoked after use
     const emailVerificationToken = tokenOperations.generateToken({
         email,
     });
@@ -150,13 +150,24 @@ export const verifyEmail = async (token) => {
     // verify the token
     const decoded = tokenOperations.verifyAccessToken(token);
 
+    // check if the token is valid
+    if (!decoded) {
+        throw createCustomError("Invalid token or already expired", 400, null);
+    }
+
     // find the user by email
     const foundUser = await User.findOne({
         email: decoded.email,
     });
 
+    // check if the user exists
     if (!foundUser) {
         throw createCustomError("User not found", 400, null);
+    }
+
+    // check if user already verified the email
+    if (foundUser.emailVerified) {
+        throw createCustomError("token already used", 400, null);
     }
 
     // update the emailVerified field

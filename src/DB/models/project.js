@@ -1,87 +1,57 @@
-const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate-v2");
-const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
-const { tools, tags } = require("../../utils/constants");
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import { tools, tags } from '../../utils/constants.js';
 
-const ProjectSchema = new Schema(
+const ProjectSchema = new mongoose.Schema(
   {
     projectID: {
-        type: String,
-        required: false,
-    },
-    ownerID: {
-        type: String,
-        required: false,
-    },
-    images: {
-        type: [String],
-        required: false,
-    },
-    videos: {
-        type: [String],
-        required: false,
+      type: String,
+      required: true,
     },
     title: {
-        type: String,
-        required: false,
+      type: String,
+      required: true,
+    },
+    ownerID: {
+      type: String,
+      required: true,
+    },
+    images: {
+      type: [String],
+      required: false,
+      default: [],
+    },
+    videos: {
+      type: [String],
+      required: false,
+      default: [],
     },
     description: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
+      default: '',
     },
     tools: {
-        type: [String],
-        enum: Object.values(tools),
-        required: false,
+      type: [String],
+      enum: Object.values(tools),
+      required: false,
+      default: [],
     },
     tags: {
-        type: [String],
-        enum: Object.values(tags),
-        required: false,
+      type: [String],
+      enum: Object.values(tags),
+      required: false,
+      default: [],
     },
     openToBeSaved: {
-        type: Boolean,
-        required: false
+      type: Boolean,
+      required: false,
+      default: false,
     }
-  },
-  {
-    timestamps: true,
   }
 );
 
-ProjectSchema.set("toObject", {
-  getters: true,
-  virtuals: true,
-  flattenMaps: true,
-});
-ProjectSchema.set("toJSON", {
-  getters: true,
-  virtuals: true,
-  flattenMaps: true,
-});
+// Create a model from the schema
+const Project = mongoose.model('Project', ProjectSchema);
 
-
-ProjectSchema.methods.getJWT = async (doctor) => {
-  let expiration_time = parseInt(CONFIG.jwt_expiration);
-  let doctor_id = doctor.doctorId;
-  return jwt.sign({ doctor_id, user_type: "doctor" }, CONFIG.jwt_secert_key, {
-    expiresIn: expiration_time,
-  }); // active for one week
-};
-
-ProjectSchema.methods.toWeb = function (lang) {
-  //return only the doctor with lang
-  let object = this.toObject();
-  removeJSONKey(object, [
-    "_id",
-    "__v",
-    "id",
-  ]);
-  return object;
-};
-
-ProjectSchema.plugin(mongoosePaginate);
-ProjectSchema.plugin(aggregatePaginate);
-
-module.exports = mongoose.model("Doctor", ProjectSchema);
+// Export the model
+export default Project;

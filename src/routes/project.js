@@ -3,12 +3,16 @@ import * as projectController from "../controllers/project.js";
 
 const router = Router();
 
-router.post("/project/add", projectController.createProject);
+// route to create a new project
+router.post("/add", projectController.createProject);
 
-router.get("/project/:projectID", projectController.getProjectById);
+// route to get project by id
+router.get("/:projectID", projectController.getProjectById);
 
-router.post("/projects/update/:projectID", projectController.updateProject);
+// route to update project by id
+router.post("/update/:projectID", projectController.updateProject);
 
-router.delete("/projects/:projectID", projectController.deleteProject);
+// route to delete project by id
+router.delete("/:projectID", projectController.deleteProject);
 
 export default router;
