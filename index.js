@@ -6,7 +6,6 @@ import helmet from "helmet";
 import connectDB from "./src/DB/config.js";
 import userRouter from "./src/routes/user.js";
 import authRouter from "./src/routes/auth.js";
-import projectRouter from "./src/routes/project.js";
 import errorHandler from "./src/middlewares/errors/errorHandler.js";
 import notFoundHandler from "./src/middlewares/errors/notFoundHandler.js";
 
@@ -32,7 +31,6 @@ const baseUrl = process.env.BASE_URL;
 // Define a route handler for the default home page
 app.use(`${baseUrl}/auth`, authRouter);
 app.use(`${baseUrl}/users`, userRouter);
-app.use(`${baseUrl}/projects`, projectRouter);
 
 app.use(errorHandler);
 app.use(notFoundHandler);
