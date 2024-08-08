@@ -7,7 +7,9 @@ import BuildingProject from "../../components/BuildingProject/BuildingProject";
 const AddOrEdditProject = () => {
   const [project, setProject] = useState({
     images: [],
-    videos: [],
+    videos: [
+      "https://www-ccv.adobe.io/v1/player/ccv/VgHkrJk43Vy/embed?api_key=behance1&bgcolor=%23191919",
+    ],
     title: "",
     description: "",
     tools: [],

@@ -29,6 +29,9 @@ body {
 .hv-90{
   height: 90vh;
 }
+wv-100{
+  width: 100vw;
+}
 .hover-color-change {
   transition: var(--transition);
 }
