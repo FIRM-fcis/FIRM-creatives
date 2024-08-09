@@ -45,3 +45,11 @@
     background-size: contain;
     background-position:right;
 }
+@media (max-width:900px) {
+    .page-not-found{
+        flex-direction: column-reverse;
+    }
+    .notfound-img{
+        background-position:center;
+    }
+}
