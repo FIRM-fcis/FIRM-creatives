@@ -6,6 +6,8 @@ import Home from './pages/Home/Home'
 import ForgetPassword from './components/ForgetPassword/ForgetPassword'
 import HomeAfterLogin from './pages/HomeAfterLogin/HomeAfterLogin'
 import InformationPage from './components/InformationPage/InformationPage'
+import './Shares/main.css'
+import PageNotFound from './pages/PageNotFound/PageNotFound'
 
 const App = () => {
   const [showSign,setShowSign]=useState(false)
@@ -28,6 +30,7 @@ const App = () => {
           <Route path='/' element={<Home/>}/>
           <Route path='/home' element={<HomeAfterLogin/>}/>
           <Route path='/forgetPassword' element={<ForgetPassword/>}/>
+          <Route path='*' element={<PageNotFound/>}/>
          </Routes>
        </div>
     </>

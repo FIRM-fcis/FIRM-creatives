@@ -1,3 +1,4 @@
+@import '../../Shares/main.css';
 .navbar{
     padding: 20px 0px;
     display: flex;
@@ -14,7 +15,7 @@
 }
 .navbar .login , .navbar .signup{
     font-size: 16px;
-    border: 1px solid  rgb(45, 45, 45);;
+    border: 1px solid var(--dark-color2);
     padding: 10px 30px;
     border-radius: 50px;
     font-weight: 500;
@@ -23,19 +24,19 @@
 }
 .navbar .login{
     background-color:transparent;
-    color: #e74c3c;
+    color: var(--second-color);
 }
 .navbar .signup{
-    background-color:#e74c3c;
-    color: white;
+    background-color: var(--second-color);
+    color: var(--main-color);
 }
 .navbar .login:hover{
     background-color:rgba(231, 76, 60, 0.4);
-    color:  rgb(45, 45, 45);;
+    color:  var(--dark-color2);
 }
 .navbar .signup:hover{
-    background-color:#ac1100;
-    color: white;
+    background-color:var(--hover-color);
+    color:var(--main-color);
 }
 .search-box{
   width: fit-content;
@@ -52,9 +53,9 @@
   outline: none;
   border-radius: 25px;
   transition: all .5s ease-in-out;
-  background-color: #e74c3c;
+  background-color:  var(--second-color);
   padding-right: 40px;
-  color:#fff;
+  color:var(--main-color);
   
 }
 .input-search::placeholder{
@@ -74,7 +75,7 @@
   border-radius: 50%;
   position: absolute;
   right: 0px;
-  color:#ffffff ;
+  color:var(--main-color);
   background-color:transparent;
   pointer-events: painted;  
 }

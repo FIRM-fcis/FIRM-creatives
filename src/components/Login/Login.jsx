@@ -3,6 +3,7 @@ import './Login.css'
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
     const [formData, setformData] = useState({
         username: '',
@@ -14,11 +15,10 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
     const [errors, setErrors] = useState({})
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [emailVerification, setemailVerfication] = useState('');
     const [isFormCleared, setIsFormCleared] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api/v1';
     const navigate = useNavigate();
 
     const handlechange = (e) => {
@@ -33,33 +33,34 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
         const validationErrors = {}
         if (!formData.username.trim()) {
             validationErrors.username = "username is required"
-            setemailVerfication('');
         }
 
         if (!formData.email.trim()) {
             validationErrors.email = "email is required"
-            setemailVerfication('');
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
             validationErrors.email = "email is not valid"
         }
 
         if (!formData.password.trim()) {
             validationErrors.password = "password is required"
-            setemailVerfication('');
         } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/.test(formData.password)) {
             validationErrors.password = "  8 to 24 characters.\nMust include uppercase and lowercase letters, a number and a special character.\n  Allowed special characters: ! @ # $ %"
         }
 
         if (formData.confirmPassword !== formData.password) {
             validationErrors.confirmPassword = "password not matched"
-            setemailVerfication('');
         }
 
         setErrors(validationErrors)
 
         if (Object.keys(validationErrors).length === 0 && isCaptchaVerified) {
-            // setemailVerfication('Signup successful! Please check your email for verification.');
-            // setIsSubmitting(true); 
+            Swal.fire({
+                title: "Signup successful!",
+                text: "Please check your email for verification",
+                icon: "success"
+              });
+            setIsSubmitting(true); 
+            setIsFormCleared(true);
             setShowSign(false)
             if(sign === "LOGIN"){
                 navigate('/home');
@@ -67,8 +68,15 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
                else{
                 setinfoPage(true)
                }
+               setformData({
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                captcha: '',
+            });
             try {
-                const url = sign === 'SIGN UP'? `${API_BASE_URL}/api/auth/signup` :`${API_BASE_URL}/api/auth/login`;
+                const url = sign === 'SIGN UP'? `${API_BASE_URL}/auth/signup` :`${API_BASE_URL}/auth/login`;
                 const response = await axios.post(url, formData, {
                     headers: { 'Content-Type': 'application/json' },
                 });
@@ -78,10 +86,15 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
                     localStorage.setItem('authToken', token);
                   }
                     console.log(`${sign} successful!`, response.data);
-                    setemailVerfication('Signup successful! Please check your email for verification.');
-                   
+                    setIsSubmitting(true); 
                     setIsFormCleared(true);
-               
+                    setShowSign(false)
+                    if(sign === "LOGIN"){
+                        navigate('/home');
+                       }
+                       else{
+                        setinfoPage(true)
+                       }
                     setformData({
                         username: '',
                         email: '',
@@ -107,7 +120,6 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
 
     useEffect(() => {
         setIsFormCleared(false);
-        setemailVerfication('')
     }, []);
 
     useEffect(() => {
@@ -197,10 +209,8 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
                             onChange={handleCaptchaChange}
                         />
                         {!isCaptchaVerified && <p className="captcha-error">Please complete the captcha to submit the form.</p>}
-                        {emailVerification ? <p className='verification-notice'>{emailVerification}</p> : <></>}
                     </>
                 }
-                {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
                 {sign === "LOGIN" ?
                     <p>Create a new account? <span className='switch' onClick={() => handleSign("SIGN UP")}>Click here</span></p>
                     : <p>Already have an account? <span className='switch' onClick={() => handleSign("LOGIN")}>Login here</span></p>

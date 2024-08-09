@@ -1,16 +1,17 @@
+@import '../../Shares/main.css';
 .information-page{
     position: absolute;
     z-index: 1;
     width: 100%;
     height: 100%;
-    background-color: #00000090;
+    background-color:var(--overlay-color);
     display: grid;
 }
 .information-page-container{
     place-self: center;
     width: max(24vw,330px);
-    color:#808080;
-    background-color: rgb(45, 45, 45);
+    color:var(--text-color);
+    background-color:var(--dark-color2);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -20,17 +21,17 @@
 }
 .input-container textarea{ 
   border:0;
-  border-bottom:1px solid #555;  
+  border-bottom:1px solid var(--input-border);  
   background:transparent;
   width:100%;
   padding:8px;
   font-size:16px;
-  color:#fff;
+  color:var(--main-color);
 }
 .input-container textarea:focus{ 
  border:none;	
  outline:none;
- border-bottom:1px solid #e74c3c;	
+ border-bottom:1px solid var(--second-color);
 }
 .input-container input:focus ~ label,
 .input-container textarea:focus ~ label
@@ -46,7 +47,7 @@
 }
 .info-done-btn , .info-skip-btn{
     font-size: 16px;
-    border: 1px solid  #e74c3c;
+    border: 1px solid  var(--second-color);
     padding: 10px 30px;
     border-radius: 50px;
     font-weight: 500;
@@ -54,24 +55,24 @@
     transition: 0.3s;
 }
 .info-skip-btn{
-    background-color:white;
-    color: #e74c3c;
+    background-color:var(--main-color);
+    color: var(--second-color);
 }
 .info-done-btn{
-    background-color:#e74c3c;
-    color: white;
+    background-color:var(--second-color);
+    color: var(--main-color);
 }
 .info-skip-btn:hover{
     background-color:rgba(231, 76, 60, 0.4);
     color:  rgb(45, 45, 45);;
 }
 .info-done-btn:hover{
-    background-color:#ac1100;
-    color: white;
+    background-color:var(--hover-color);
+    color: var(--main-color);
 }
 .add-link{
-	color:#fff;
-	background-color:#e74c3c;
+	color:var(--main-color);
+	background-color:var(--second-color);
 	outline: none;
     border: 0;
 	padding:10px 20px;
@@ -83,14 +84,14 @@
     margin-top:-20px; ;
 }
 .add-link:hover{
-    background-color: #ac1100;
+    background-color: var(--hover-color);
 }
 input[type="file"]::file-selector-button {
     border-radius: 4px;
     padding: 0 16px;
     height: 40px;
     cursor: pointer;
-    background-color: white;
+    background-color: var(--main-color);
     border: 1px solid rgba(0, 0, 0, 0.16);
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
     margin-right: 16px;
@@ -100,15 +101,15 @@ input[type="file"]::file-selector-button {
   }
   
   input[type="file"]::file-selector-button:hover {
-    background-color: #e8eaed;
+    background-color: var(--light-color);
   }
   .info-title{
     text-align: center;
     font-size: 23px;
-    color: white;
+    color:var(--main-color);
     margin-bottom:10px ;
   }
 .info-file-title{
-    color: white;
+    color:var(--main-color);
     font-size: 16px;
 }

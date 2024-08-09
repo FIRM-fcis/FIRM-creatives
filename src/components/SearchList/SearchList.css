@@ -1,6 +1,7 @@
+@import '../../Shares/main.css';
 .search-list{
     width: 100%;
-    background-color: #e74c3c;
+    background-color: var(--second-color);
     max-height: 300px;
     border-radius: 10px;
     position: absolute;
@@ -18,9 +19,9 @@
 }
 .search-list li{
     padding: 8px 10px;
-    color: white;
+    color: var(--main-color);
 }
 .search-list li:hover{
-   background-color: #ac1100;
+   background-color: var(--hover-color);
    cursor: pointer;
 }
