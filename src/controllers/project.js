@@ -4,9 +4,9 @@ export const createProject = async (req, res, next) => {
     try {
 
         const projectData = req.body;
-        // const ownerID = req.user.id;
+        const ownerID = req.userId;
 
-        const project = await projectServices.createProject(projectData);
+        const project = await projectServices.createProject(projectData, ownerID);
 
         return res.status(200).json({
             message: "Project created successfully!",
@@ -21,41 +21,59 @@ export const createProject = async (req, res, next) => {
     }
 }
 
-export const getProjectById = async (req, res) => {
+export const getProjectById = async (req, res, next) => {
     try {
-        const project = await projectServices.getProjectById(req.params.projectID);
+        const projectID = req.params.projectID;
+
+        const project = await projectServices.getProjectById(projectID);
+
         return res.status(200).json({
             message: "Project fetched successfully",
             body: project,
             status: 200,
         });
+
     } catch (error) {
-        res.status(400).json(createCustomError(error));
+        next(error);
     }
 }
 
-export const updateProject = async (req, res) => {
+export const updateProject = async (req, res, next) => {
     try {
-        const project = await projectServices.updateProject(req.params.projectID, req.body);
+
+        const projectData = req.body;
+        const projectID = req.params.projectID;
+        const ownerID = req.userId;
+
+        const project = await projectServices.updateProject(projectID, projectData, ownerID);
+
         return res.status(200).json({
             message: "Project updated successfully",
             body: project,
             status: 200,
         });
+
     } catch (error) {
-        res.status(400).json(createCustomError(error));
+        next(error);
     }
 }
 
-export const deleteProject = async (req, res) => {
+export const deleteProject = async (req, res, next) => {
     try {
-        const project = await projectServices.deleteProject(req.params.projectID);
+
+        const projectId = req.params.projectID;
+        const ownerID = req.userId;
+
+        const project = await projectServices.deleteProject(projectId, ownerID);
+
         return res.status(200).json({
             message: "Project deleted successfully",
             body: project,
             status: 200,
         });
+
     } catch (error) {
-        res.status(400).json(createCustomError(error));
+
+        next(error);
     }
 }
