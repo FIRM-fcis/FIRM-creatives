@@ -4,7 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
+const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav }) => {
     const [formData, setformData] = useState({
         username: '',
         email: '',
@@ -57,16 +57,18 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
             Swal.fire({
                 title: "Signup successful!",
                 text: "Please check your email for verification",
-                icon: "success"
+                icon: "success",
+                timer: 10000,
               });
             setIsSubmitting(true); 
             setIsFormCleared(true);
-            setShowSign(false)
+            setShowSign(false);
+            handleNav(true);
             if(sign === "LOGIN"){
                 navigate('/home');
                }
                else{
-                setinfoPage(true)
+                setinfoPage(true);
                }
                setformData({
                 username: '',
@@ -88,7 +90,8 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage }) => {
                     console.log(`${sign} successful!`, response.data);
                     setIsSubmitting(true); 
                     setIsFormCleared(true);
-                    setShowSign(false)
+                    setShowSign(false);
+                    handleNav(true);
                     if(sign === "LOGIN"){
                         navigate('/home');
                        }

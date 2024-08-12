@@ -8,12 +8,23 @@
 .navbar .logo{
     width: 60px;
 }
+.profile-img-container{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+.profile-img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 .navbar-right{
     display: flex;
     align-items: center;
     gap: 40px;
 }
-.navbar .login , .navbar .signup{
+.navbar .login , .navbar .signup , .navbar .hire-btn , .navbar .share-btn{
     font-size: 16px;
     border: 1px solid var(--dark-color2);
     padding: 10px 30px;
@@ -22,19 +33,19 @@
     cursor: pointer;
     transition: 0.3s;
 }
-.navbar .login{
+.navbar .login , .navbar .hire-btn{
     background-color:transparent;
     color: var(--second-color);
 }
-.navbar .signup{
+.navbar .signup , .navbar .share-btn{
     background-color: var(--second-color);
     color: var(--main-color);
 }
-.navbar .login:hover{
+.navbar .login:hover  , .navbar .hire-btn:hover{
     background-color:rgba(231, 76, 60, 0.4);
     color:  var(--dark-color2);
 }
-.navbar .signup:hover{
+.navbar .signup:hover  , .navbar .share-btn:hover{
     background-color:var(--hover-color);
     color:var(--main-color);
 }
@@ -43,7 +54,7 @@
   height: fit-content;
   position: relative;
 }
-.input-search{
+.input-search, .input-search2{
   height: 50px;
   width: 50px;
   border-style: none;
@@ -58,13 +69,13 @@
   color:var(--main-color);
   
 }
-.input-search::placeholder{
+.input-search::placeholder,.input-search2::placeholder{
   color:rgba(255,255,255,.5);
   font-size: 18px;
   letter-spacing: 2px;
   font-weight: 100;
 }
-.btn-search{
+.btn-search, .btn-search2{
   width: 50px;
   height: 50px;
   border-style: none;
@@ -79,58 +90,195 @@
   background-color:transparent;
   pointer-events: painted;  
 }
-.btn-search:focus ~ .input-search ,.input-search:focus {
-  width: 50vw;
+.btn-search:focus ~ .input-search ,.input-search:focus , .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
   border-radius: 20px;
   border-bottom:1px solid rgba(255,255,255,.5);
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
   padding-left: 20px;
 }
-
+.btn-search:focus ~ .input-search ,.input-search:focus {
+  width: 50vw;
+}
+.btn-search2:focus ~ .input-search2 ,.input-search2:focus {
+  width: 32vw;
+}
+.tooltip {
+  visibility: hidden;
+  z-index: 1;
+  opacity: .40;
+  width: 20vw;
+  height: 250px;
+  padding: 20px;
+  background: var(--dark-color2);
+  color: var(--main-color);
+  position: absolute;
+  top:100px;
+  left: -15vw;
+  border-radius: 9px;
+  transform: translateY(9px);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+  text-align: center;
+  font-size: 18px;
+}
+.tooltip::after {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 12.5px 0 12.5px;
+  border-color: #333 transparent transparent transparent;
+  position: absolute;
+  top:-10%;
+  right: 12.5%;
+  transform: rotate(180deg);
+}
+.profile-img-container:hover .tooltip{
+  visibility: visible;
+  transform: translateY(-10px);
+  opacity: 1;
+}
+.tooltip-img-frame{
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--second-color);
+  padding: 2.5px;
+  border-radius: 50%;
+  outline: 1px solid var(--second-color);
+  outline-offset:5px ;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.tooltip-img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.tooltip p{
+  margin-top: 10px;
+}
+.tooltip button{
+  background-color: var(--second-color);
+  padding: 10px 30px;
+  color: var(--main-color);
+  border-radius: 20px;
+  font-size: 16px;
+  border: 1px solid var(--dark-color2);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+.tooltip button:hover{
+  background-color:var(--hover-color);
+  color:var(--main-color);
+}
 @media (max-width:1050px) {
   .navbar .logo{
     width: 50px;
   }
+  
+.profile-img-container{
+  width: 40px;
+  height: 40px;
+}
   .navbar-right{
     gap: 30px;
   }
-  .navbar .login , .navbar .signup{
+  .navbar .login , .navbar .signup , .navbar .hire-btn , .navbar .share-btn{
     padding: 10px 25px;
   }
   .btn-search:focus ~ .input-search ,.input-search:focus{
     width: 40vw;
   }
-
+  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
+    width: 28vw;
+  }
+  .tooltip {
+    width: 30vw;
+    /* height: 250px;
+    padding: 20px;
+    top:100px; */
+    left: -25vw;
+  }
+  .tooltip::after {
+    top:-10%;
+    right: 8%;
+  }
+  /* .profile-img-container:hover .tooltip{
+    visibility: visible;
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  .tooltip-img-frame{
+    width: 80px;
+    height: 80px;
+    padding: 2.5px;
+    outline-offset:5px ;
+    margin-bottom: 20px;
+  }
+  .tooltip p{
+    margin-top: 10px;
+  }
+  .tooltip button{
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+  } */
 }
 @media (max-width:900px) {
   .navbar .logo{
     width: 40px;
   }
+.profile-img-container{
+    width: 30px;
+    height: 30px;
+  }
   .navbar-right{
     gap: 20px;
   }
-  .navbar .login , .navbar .signup{
+  .navbar .login , .navbar .signup , .navbar .hire-btn , .navbar .share-btn{
     padding: 8px 20px;
   }
   .btn-search:focus ~ .input-search ,.input-search:focus{
     width: 35vw;
   }
-  .input-search{
+  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
+    width: 25vw;
+  }
+  .input-search ,.input-search2{
     height: 46px;
     width: 46px;
     border-radius: 23px;
     padding-right: 36px;
   }
-  .btn-search{
+  .btn-search,.btn-search2{
     width: 46px;
     height: 46px;
     font-size: 18px;
     border-radius: 50%; 
   }
+   .tooltip {
+    width: 30vw;
+    height: 250px;
+    padding: 20px 15px;
+    top:80px;
+    left: -25vw;
+    font-size: 16px;
+  }
+  .tooltip::after {
+    top:-10%;
+    right: 6%;
+  }
 }
 @media (max-width:750px) {
   .navbar .logo{
     width: 30px;
+  }
+.profile-img-container{
+    width: 25px;
+    height: 25px;
   }
   .navbar-right{
     gap: 7px;
@@ -138,30 +286,60 @@
   .navbar .login , .navbar .signup{
     padding: 7px 12px;
   }
+  .navbar .hire-btn , .navbar .share-btn{
+    font-size: 10px;
+    padding: 10px 8px;
+    border-radius: 50px;
+    font-weight: 400;
+}
   .btn-search:focus ~ .input-search ,.input-search:focus{
     padding-left: 8px;
     width: 30vw;
   }
-  .input-search::placeholder{
+  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
+    padding-left: 8px;
+    width: 18vw;
+  }
+  .input-search::placeholder ,  .input-search2::placeholder{
     font-size: 14px;
   }
-  .input-search{
-    height: 40px;
-    width: 40px;
+  .input-search , .input-search2{
+    height: 36px;
+    width: 36px;
     font-size: 16px;
-    border-radius: 20px;
-    padding-right: 30px;
+    border-radius: 18px;
+    padding-right: 26px;
   }
-  .btn-search{
-    width: 40px;
-    height: 40px;
+  .btn-search,  .btn-search2{
+    width: 36px;
+    height: 36px;
     font-size: 16px;
     border-radius: 50%; 
   }
+  .tooltip {
+    width: 55vw;
+    height: 250px;
+    padding: 20px 10px;
+    top:80px;
+    left: -50vw;
+    font-size:14px ;
+  }
+  .tooltip::after {
+    top:-10%;
+    right: 2%;
+  }
+  .tooltip button{
+    padding: 10px 25px;
+    font-size: 14px;
+  } 
 }
 @media (max-width:350px) {
   .navbar .logo{
     width: 25px;
+  }
+.profile-img-container{
+    width: 20px;
+    height: 20px;
   }
   .navbar-right{
     gap: 5px;
@@ -169,8 +347,48 @@
   .navbar .login , .navbar .signup{
     padding: 6px 12px;
   }
+  .navbar .hire-btn , .navbar .share-btn{
+    font-size: 8px;
+    padding: 8px 8px;
+    border-radius: 50px;
+    font-weight: 400;
+}
+
   .btn-search:focus ~ .input-search ,.input-search:focus{
     padding-left: 8px;
     width: 28vw;
   }
+  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
+    padding-left: 8px;
+    width: 20vw;
+  }
+  .input-search , .input-search2{
+    height: 32px;
+    width: 32px;
+    font-size: 14px;
+    border-radius: 16px;
+    padding-right: 22px;
+  }
+  .btn-search,  .btn-search2{
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 50%; 
+  }
+  .tooltip {
+    width: 60vw;
+    height: 250px;
+    padding: 20px 10px;
+    top:60px;
+    left: -55vw;
+    font-size:12px ;
+  }
+  .tooltip::after {
+    top:-8%;
+    right: 0%;
+  }
+  .tooltip button{
+    padding: 10px 20px;
+    font-size: 12px;
+  } 
 }

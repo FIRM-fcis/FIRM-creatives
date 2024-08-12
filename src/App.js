@@ -13,6 +13,7 @@ const App = () => {
   const [showSign,setShowSign]=useState(false)
   const [sign,setsign]=useState("")
   const[infoPage,setinfoPage]=useState(false);
+  const [nav,setnav]=useState(false);
 
   const handleSign=(x)=>{
     setsign(x);
@@ -20,17 +21,20 @@ const App = () => {
   const handleInfoPage=(y)=>{
     setinfoPage(y);
   }
+  const handleNav=(z)=>{
+    setnav(z);
+  }
   return (
     <>
-    {showSign?<Login setShowSign={setShowSign} sign={sign} handleSign={handleSign} setinfoPage={setinfoPage}/>:<></>}
+    {showSign?<Login handleNav={handleNav} setShowSign={setShowSign} sign={sign} handleSign={handleSign} setinfoPage={setinfoPage}/>:<></>}
     {infoPage?<InformationPage handleInfoPage={handleInfoPage}/>:<></>}
        <div className='app'>
-         <Navbar setShowSign={setShowSign} handleSign={handleSign}/>
+      <Navbar nav={nav} handleNav={handleNav} setShowSign={setShowSign} handleSign={handleSign}/>  
          <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/home' element={<HomeAfterLogin/>}/>
           <Route path='/forgetPassword' element={<ForgetPassword/>}/>
-          <Route path='*' element={<PageNotFound/>}/>
+          <Route path='*' element={<PageNotFound nav={nav}/>}/>
          </Routes>
        </div>
     </>
