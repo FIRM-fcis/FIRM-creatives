@@ -21,6 +21,25 @@ export const createProject = async (req, res, next) => {
     }
 }
 
+export const getAllProjects = async (req, res, next) => {
+    try {
+
+        // get request query parameters
+        const { page, limit } = req.query;
+
+        const projects = await projectServices.getAllProjects(page, limit);
+
+        return res.status(200).json({
+            message: "Projects fetched successfully",
+            body: projects,
+            status: 200,
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const getProjectById = async (req, res, next) => {
     try {
         const projectID = req.params.projectID;

@@ -27,13 +27,32 @@ export const createProject = async (projectData, ownerID) => {
 
 export const getProjectById = async (projectID) => {
     // check if the project exists
-    const project = await Project.findOne({ projectID });
+    const project = await Project.findOne({ projectID }, { __v: false, _id: false });
 
     if (!project) {
         throw createCustomError("Project not found!", 404, null);
     }
 
     return project;
+}
+
+export const getAllProjects = async (page, limit) => {
+
+    // const pageInt = parseInt(page);
+    // const limitInt = parseInt(limit);
+
+    // check if the page and limit are provided
+    if (!page || !limit) {
+        throw createCustomError("Please provide page and limit!", 400, null);
+    }
+
+    // calculate the number of documents to skip
+    const offset = (page - 1) * limit;
+
+    // get all projects
+    const projects = await Project.find({}, { __v: false, _id: false }).skip(offset).limit(limit);
+
+    return projects;
 }
 
 export const updateProject = async (projectID, projectData, ownerID) => {

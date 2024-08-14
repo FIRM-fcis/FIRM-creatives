@@ -45,8 +45,8 @@ app.use(notFoundHandler);
 try {
   app.listen(process.env.PORT, async () => {
     console.log(`Server started on http://localhost:${process.env.PORT}`);
-    await connectDB();
   });
+  await connectDB();
 } catch (error) {
   console.error("Error starting server: ", error);
 }
