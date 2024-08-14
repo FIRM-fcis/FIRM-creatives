@@ -1,4 +1,5 @@
 import Project from "../DB/models/project.js";
+import User from "../DB/models/user.js";
 import { createCustomError } from "../middlewares/errors/customError.js";
 import { v4 as uuid } from "uuid";
 const ProjectPrefix = 'PROJECT'
@@ -34,6 +35,26 @@ export const getProjectById = async (projectID) => {
     }
 
     return project;
+}
+
+export const getProjectByUserID = async (userID) => {
+
+    // check if the userId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
+    if (userID.length !== 24 && !(userID instanceof Uint8Array) && isNaN(userID)) {
+        throw createCustomError("Invalid user id", 400, null);
+    }
+
+    // check if the user already exists
+    const foundUser = await User.findOne({ _id: userID });
+
+    if (!foundUser) {
+        throw createCustomError("User not found!", 404, null);
+    }
+
+    // get all projects by user id
+    const projects = await Project.find({ ownerID: userID }, { __v: false, _id: false });
+
+    return projects;
 }
 
 export const getAllProjects = async (page, limit) => {

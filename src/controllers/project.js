@@ -57,6 +57,24 @@ export const getProjectById = async (req, res, next) => {
     }
 }
 
+export const getProjectByUserID = async (req, res, next) => {
+    try {
+
+        const { userID } = req.params;
+
+        const projects = await projectServices.getProjectByUserID(userID);
+
+        return res.status(200).json({
+            message: "Projects fetched successfully!",
+            body: projects,
+            status: 200,
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const updateProject = async (req, res, next) => {
     try {
 

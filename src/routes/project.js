@@ -10,6 +10,9 @@ router.get("/", projectController.getAllProjects);
 // route to get project by id
 router.get("/:projectID", authorize, projectController.getProjectById);
 
+// route to get project b user id
+router.get("/user/:userID", projectController.getProjectByUserID);
+
 // route to create a new project
 router.post("/add", authorize, projectController.createProject);
 
