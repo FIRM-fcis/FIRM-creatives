@@ -13,5 +13,8 @@ router.get("/:userId", authorize, userController.getUserById);
 // route to follow a user
 router.post("/follow/:followingId", authorize, userController.followUser);
 
+// route to unfollow a user
+router.post("/unfollow/:followingId", authorize, userController.unfollowUser);
+
 
 export default router;

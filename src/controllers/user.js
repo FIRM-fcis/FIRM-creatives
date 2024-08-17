@@ -47,3 +47,20 @@ export const followUser = async (req, res, next) => {
     next(error);
   }
 }
+
+export const unfollowUser = async (req, res, next) => {
+  try {
+    const followingId = req.params.followingId;
+    const followerId = req.userId;
+    await userService.unfollowUser(followingId, followerId);
+
+    return res.status(200).json({
+      message: "User unfollowed successfully!",
+      body: null,
+      status: 200,
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}

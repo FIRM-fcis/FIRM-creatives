@@ -68,3 +68,36 @@ export const followUser = async (followingId, followerId) => {
   // increment the followers count of the followerId
   await User.updateOne({ _id: followingId }, { $inc: { followers: 1 } });
 };
+
+export const unfollowUser = async (followingId, followerId) => {
+  // check if the followingId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
+  if (followingId.length !== 24 && !(followingId instanceof Uint8Array) && isNaN(followingId)) {
+    throw createCustomError("Invalid following id", 400, null);
+  }
+
+  // check if the followerId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
+  if (followerId.length !== 24 && !(followerId instanceof Uint8Array) && isNaN(followerId)) {
+    throw createCustomError("Invalid follower id", 400, null);
+  }
+
+  // check if the followingId is the same as the followerId
+  if (followingId === followerId) {
+    throw createCustomError("You can't unfollow yourself!!", 400, null);
+  }
+
+  // check if the followingId is not being followed by the followerId
+  const followingFollowers = await FollowingFollowers.find({ followingId, followerId });
+
+  if (followingFollowers.length === 0) {
+    throw createCustomError("You are not following this user!!", 400, null);
+  }
+
+  // delete the following_followers document
+  await FollowingFollowers.deleteOne({ followingId, followerId });
+
+  // decrement the following count of the followerId
+  await User.updateOne({ _id: followerId }, { $inc: { following: -1 } });
+
+  // decrement the followers count of the followerId
+  await User.updateOne({ _id: followingId }, { $inc: { followers: -1 } });
+};
