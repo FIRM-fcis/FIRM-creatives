@@ -29,3 +29,21 @@ export const getUserById = async (req, res, next) => {
     next(error);
   }
 };
+
+export const followUser = async (req, res, next) => {
+  try {
+
+    const followingId = req.params.followingId;
+    const followerId = req.userId;
+    await userService.followUser(followingId, followerId);
+
+    return res.status(200).json({
+      message: "User followed successfully!",
+      body: null,
+      status: 200,
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
