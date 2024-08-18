@@ -75,7 +75,7 @@ const InformationPage = ({handleInfoPage}) => {
         </div>
         <button className='add-link' onClick={handleLinkAdd}>Add Link</button>
         <p className='info-file-title'>Resume :</p>
-        <input type="file" accept=".pdf,.doc,.docx" onChange={handleResumeChange} />
+        <input className='info-resume' type="file" accept=".pdf,.doc,.docx" onChange={handleResumeChange} />
         <div className='info-button-container'>
           <button className='info-done-btn' type="submit" onClick={()=>{navigate('./home');setinfoBtn(true);handleInfoPage(false)}}>Done</button>
           <button className='info-skip-btn' onClick={() => {navigate('/home');setinfoBtn(true);handleInfoPage(false)}}>Skip</button>

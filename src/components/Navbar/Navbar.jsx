@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets'
 import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import SearchList from '../SearchList/SearchList'
 const Navbar = ({setShowSign,handleSign,nav}) => {
@@ -31,6 +31,8 @@ const Navbar = ({setShowSign,handleSign,nav}) => {
   const handleBlur=()=>{
     setshowSearchList(false);
   }
+  const navigate = useNavigate();
+
   return (
     <div className='navbar'>
         <Link to={nav?'/home':'/'}><img src={assets.logo} alt='Logo' draggable='false' className='logo'/></Link>
@@ -48,14 +50,14 @@ const Navbar = ({setShowSign,handleSign,nav}) => {
             <button className='hire-btn'>Hire Freelancers</button>
             <button className='share-btn'>Share Your Work</button>
             <div className="profile-img-container">
-              <Link to='/' ><img src={assets.profile} alt='Profile Photo' draggable='false' className='profile-img'/></Link>
+            <Link to='/profile'><img src={assets.profile} alt='Profile Photo' draggable='false' className='profile-img'/></Link>
               <div className="tooltip">
                 <div className="tooltip-img-frame">
                 <img src={assets.profile} alt='Profile Photo' draggable='false' className='tooltip-img'/>
                 </div>
                 <p>Dareen Housam</p>
                 <p>dareenhousam6@gmail.com</p>
-                <button>Your Profile</button>
+                <button onClick={()=>{navigate('/profile')}}>Your Profile</button>
               </div>
             </div>
           
@@ -63,8 +65,6 @@ const Navbar = ({setShowSign,handleSign,nav}) => {
            <>
              <button onClick={()=>{setShowSign(true);handleSign("LOGIN")}} className='login'>Log In</button>
              <button onClick={()=>{setShowSign(true);handleSign("SIGN UP")}} className='signup'>Sign Up</button>
-             {console.log("hi nav")}
-             {console.log(nav)}
            </>
            }   
         </div>

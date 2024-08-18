@@ -1,0 +1,287 @@
+@import '../../Shares/main.css';
+.edit-profile-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 50px 20px;
+}
+.edit-profile-info-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25vw;
+}
+.edit-profile-info-list ul{
+    width: 25vw;
+    height: 250px;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--dark-color2);
+}
+.edit-profile-info-list li {
+    padding: 20px;
+    border-top: 1px solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 18px;
+}
+.edit-profile-info-list li:hover{
+    background-color: var(--input-border);
+}
+.edit-profile-info-list li:first-child {
+    border: 0;
+}
+.list-photos{
+    width: 5vw;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 0px;
+}
+.list-photos img{
+    max-width:4.8vw;
+    height: 19%;
+}
+.edit-profile-info-content {
+    width: 50vw;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  #profile-basic-information,
+  #profile-about-me,
+  #profile-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 15px 20px;
+    border-radius: 4px;
+    background-color: var(--dark-color2);
+  }
+  #profile-availability{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+    padding: 15px 20px;
+    border-radius: 4px;
+    background-color: var(--dark-color2);
+  }
+  .availability-choices{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 50px;
+  }
+  .availability-choice{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+  
+  #profile-basic-information label,
+  #profile-about-me label,
+  #profile-links label {
+    display: block;
+    font-weight: bold;
+    color: var(--main-color);
+    font-size: 18px;
+  }
+  #profile-availability label{
+    font-weight: bold;
+    display: inline;
+    color: var(--main-color);
+    font-size: 18px;
+  }
+  #profile-basic-information input:not(.profile-resume),
+  #profile-about-me textarea,
+  #profile-links input {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 15px 0px;
+  }
+  #profile-about-me textarea{
+    height: 150px;
+  }
+  #profile-basic-information input:focus:not(.profile-resume),
+  #profile-about-me textarea:focus,
+  #profile-links input
+  :focus {
+    outline: 0;
+    border: 3px solid var(--second-color);
+  }
+  #profile-basic-information p {
+    font-size: 14px;
+    color: var(--main-color);
+    margin: 15px 0px;
+  }
+  
+  #profile-links {
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 10px;
+  }
+  
+  .profile-link {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #profile-links button:not(.profile-add-link) {
+    padding: 5px 10px;
+    border: 3px solid var(--main-color);
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--main-color);
+    margin: 15px 0px;
+    font-size: 14px;
+  }
+  #profile-links button:not(.profile-add-link):hover{
+    background-color: var(--text-color);
+  }
+  .profile-add-link{
+    width: 100%;
+    height: 40px;
+    padding: 10px 0px;
+    margin-top: 20px;
+    background-color: var(--second-color);
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--main-color);
+    padding: 5px 10px;
+    border: none;
+    font-size: 18px;
+  }
+  .profile-add-link:hover{
+    background-color: var(--hover-color);
+  }
+  .profile-resume{
+    color: var(--second-color);
+  }
+  .profile-resume::file-selector-button{
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: var(--main-color);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s;
+    margin: 15px 20px 15px 0px;
+    font-weight: 600;
+  }
+  .profile-save{
+    text-align: center;
+    margin: auto;
+    padding: 15px 30px;
+    border: 3px solid var(--main-color);
+    border-radius: 10px;
+    background-color: var(--second-color);
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--main-color);
+    font-size: 16px;
+  }
+  .profile-save:hover{
+    background-color: var(--hover-color);
+  }
+@media (max-width:1050px) {
+  #profile-availability{
+    flex-direction: column;
+    padding: 15px 15px;
+}
+.availability-choices{
+      margin: auto;
+    }
+}
+@media (max-width:900px) {
+    .edit-profile-info-list li {
+        font-size: 16px;
+    }
+    #profile-basic-information label,
+    #profile-about-me label,
+    #profile-links label,
+    #profile-availability label,
+    .profile-save,
+    .profile-add-link {
+        font-size: 14px;
+    }
+    #profile-basic-information input:not(.profile-resume),
+    #profile-about-me textarea,
+    #profile-links input {
+      font-size: 14px;
+      margin: 10px 0px;
+    }
+}
+@media (max-width:750px) {
+    .edit-profile-info{
+        flex-direction: column;
+        padding: 20px 20px;
+        gap: 30px;
+    }
+    .edit-profile-info-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .edit-profile-info-list ul{
+        width: 90vw;
+        height: 50px;
+        border-bottom: 3px solid var(--second-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .edit-profile-info-list li {
+        font-size: 14px;
+        height: 100%;
+        border:0;
+        padding: 7px 15px;
+    }
+    .list-photos{
+     display: none;
+    }
+    .edit-profile-info-content {
+        width: 100%;
+      }
+      .profile-availability {
+        padding: 15px 10px;
+    } 
+    #profile-availability label{
+        font-size: 12px;
+    }
+    #profile-basic-information input:not(.profile-resume),
+    #profile-links input {
+      width: 80%;
+    }
+}
+@media (max-width:350px) {
+    .edit-profile-info-list li {
+        font-size: 12px;
+        padding: 7px 10px;
+    }
+    #profile-availability{
+        padding: 15px 15px;
+    }
+    #profile-basic-information input:not(.profile-resume),
+    #profile-links input {
+      width: 70%;
+    }
+    #profile-availability input{
+      margin: 0px 13px;
+    }
+}
+

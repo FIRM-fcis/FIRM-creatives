@@ -120,6 +120,7 @@
   box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
   text-align: center;
   font-size: 18px;
+  cursor:default;
 }
 .tooltip::after {
   content: " ";
@@ -177,7 +178,7 @@
   .navbar .logo{
     width: 50px;
   }
-  
+
 .profile-img-container{
   width: 40px;
   height: 40px;
@@ -196,36 +197,12 @@
   }
   .tooltip {
     width: 30vw;
-    /* height: 250px;
-    padding: 20px;
-    top:100px; */
     left: -25vw;
   }
   .tooltip::after {
     top:-10%;
     right: 8%;
   }
-  /* .profile-img-container:hover .tooltip{
-    visibility: visible;
-    transform: translateY(-10px);
-    opacity: 1;
-  }
-  .tooltip-img-frame{
-    width: 80px;
-    height: 80px;
-    padding: 2.5px;
-    outline-offset:5px ;
-    margin-bottom: 20px;
-  }
-  .tooltip p{
-    margin-top: 10px;
-  }
-  .tooltip button{
-    padding: 10px 30px;
-    font-size: 16px;
-    font-weight: 500;
-    margin-top: 20px;
-  } */
 }
 @media (max-width:900px) {
   .navbar .logo{
