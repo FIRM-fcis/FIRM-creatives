@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login";
 import { Route, Routes } from "react-router-dom";
@@ -11,6 +11,8 @@ import ProjectManger from "./components/ProjectManger/ProjectManger";
 import AddProject from "./pages/AddProject/AddProject";
 import AddOrEdditProject from "./pages/AddProject/AddProject";
 import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
+import handelApiCalls from './Shares/handelApiCalls'
+
 
 const App = () => {
   const [projects, setProjects] = useState([
@@ -19,7 +21,7 @@ const App = () => {
       description:
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
       tools: [],
-      tages: [],
+      tags: [],
       openToBeSaved: true,
       images: [
         "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
@@ -210,14 +212,21 @@ const App = () => {
   const [showSign, setShowSign] = useState(false);
   const [sign, setsign] = useState("");
   const [infoPage, setinfoPage] = useState(false);
-
+  const [projectEndPoint,setProjectEndPoint]=useState("")
   const handleSign = (x) => {
     setsign(x);
   };
   const handleInfoPage = (y) => {
     setinfoPage(y);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await handelApiCalls("projects?page=4&limit=4");
+      setProjects(data);
+    };
 
+    fetchData();
+  }, [projectEndPoint]);
   return (
     <>
       {showSign ? (
@@ -238,7 +247,7 @@ const App = () => {
           <Route path="/home" element={<HomeAfterLogin />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
         </Routes>
-      </div>  
+      </div>
       {/* <ProjectDetails project = {projects[0]}/> */}
 
       <ProjectManger projects={projects} />

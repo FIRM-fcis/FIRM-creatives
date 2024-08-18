@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import "./AddContent.css";
-import {
-  handleImageUpload,
-  handleDescriptionChange,
-  handleTagsChange,
-  handleTitleChange,
-  handleToolsChange,
-  handleVideoUpload,
-} from "../../Shares/handelInputs";
+import { handelFunctions } from "../../Shares/handelInputs";
 const AddContent = ({ project, setProject }) => {
   return (
     <div className="sidebar">
@@ -20,7 +13,9 @@ const AddContent = ({ project, setProject }) => {
             type="file"
             accept="image/*"
             className="d-none"
-            onChange={(event) => handleImageUpload(event, setProject, project)}
+            onChange={(event) =>
+              handelFunctions.ImageUpload(event, setProject, project)
+            }
           />
         </label>
 
@@ -31,13 +26,15 @@ const AddContent = ({ project, setProject }) => {
             type="file"
             accept="video/*"
             className="d-none"
-            onChange={(event) => handleVideoUpload(event, setProject, project)}
+            onChange={(event) =>
+              handelFunctions.VideoUpload(event, setProject, project)
+            }
           />
         </label>
 
         <label
           className="hover-color-change option cursor-pointer"
-          onClick={() => handleTitleChange(setProject, project)}
+          onClick={() => handelFunctions.TitleChange(setProject, project)}
         >
           <i className="fa-solid fa-heading"></i>
           <span>Title</span>
@@ -45,7 +42,9 @@ const AddContent = ({ project, setProject }) => {
 
         <label
           className="option hover-color-change cursor-pointer"
-          onClick={() => handleDescriptionChange(setProject, project)}
+          onClick={() =>
+            handelFunctions.DescriptionChange(setProject, project)
+          }
         >
           <i className="fa-solid fa-note-sticky"></i>
           <span>Description</span>
@@ -53,7 +52,7 @@ const AddContent = ({ project, setProject }) => {
 
         <label
           className="option hover-color-change cursor-pointer"
-          onClick={() => handleToolsChange(setProject, project)}
+          onClick={() => handelFunctions.ToolsChange(setProject, project)}
         >
           <i className="fa-solid fa-gear"></i>
           <span>Tools</span>
@@ -61,7 +60,7 @@ const AddContent = ({ project, setProject }) => {
 
         <label
           className="option hover-color-change cursor-pointer"
-          onClick={() => handleTagsChange(setProject,project)}
+          onClick={() => handelFunctions.TagsChange(setProject, project)}
         >
           <i className="fa-solid fa-tags"></i>
           <span>Tags</span>

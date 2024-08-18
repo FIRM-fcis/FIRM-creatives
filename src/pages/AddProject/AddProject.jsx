@@ -6,14 +6,14 @@ import BuildingProject from "../../components/BuildingProject/BuildingProject";
 
 const AddOrEdditProject = () => {
   const [project, setProject] = useState({
-    images: [],
-    videos: [
-      "https://www-ccv.adobe.io/v1/player/ccv/VgHkrJk43Vy/embed?api_key=behance1&bgcolor=%23191919",
-    ],
     title: "",
     description: "",
     tools: [],
     tags: [],
+    openToBeSaved: false,
+    images: [],
+    videos: [],
+    ownerId: "",
   });
   return (
     <div className="container t-center hv-100">
@@ -23,6 +23,8 @@ const AddOrEdditProject = () => {
             {project.images.length > 0 ||
             project.videos.length > 0 ||
             project.title ||
+            project.tags.length > 0 ||
+            project.tools.length > 0 ||
             project.description ? (
               <BuildingProject project={project} setProject={setProject} />
             ) : (
