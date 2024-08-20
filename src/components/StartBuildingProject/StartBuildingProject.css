@@ -1,0 +1,11 @@
+.hover-input{
+    background-color: var(--second-color);
+    opacity: 0.5;
+    color: var(--main-color);
+    transition: var(--transition);
+}
+.hover-input:hover{ 
+    /* background-color: var(--main-color); */
+    opacity: 1;
+    /* color: var(--second-color); */
+}

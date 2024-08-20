@@ -10,7 +10,7 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
         email: '',
         password: '',
         confirmPassword: '',
-        captcha: ''
+        // captcha: ''
     })
     const [errors, setErrors] = useState({})
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
@@ -54,12 +54,12 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
         setErrors(validationErrors)
 
         if (Object.keys(validationErrors).length === 0 && isCaptchaVerified) {
-            Swal.fire({
-                title: "Signup successful!",
-                text: "Please check your email for verification",
-                icon: "success",
-                timer: 10000,
-              });
+            // Swal.fire({
+            //     title: "Signup successful!",
+            //     text: "Please check your email for verification",
+            //     icon: "success",
+            //     timer: 10000,
+            //   });
             setIsSubmitting(true); 
             setIsFormCleared(true);
             setShowSign(false);
@@ -73,18 +73,19 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
                else{
                 setinfoPage(true);
                }
-               setformData({
-                username: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                captcha: '',
-            });
+            //    setformData({
+            //     username: '',
+            //     email: '',
+            //     password: '',
+            //     confirmPassword: '',
+            //     captcha: '',
+            // });
             try {
                 const url = sign === 'SIGN UP'? `${API_BASE_URL}/auth/signup` :`${API_BASE_URL}/auth/login`;
                 const response = await axios.post(url, formData, {
                     headers: { 'Content-Type': 'application/json' },
                 });
+                
                 if (response.status === 200 || response.status === 201) {
                   const token = response.data.token;
                   if (rememberMe) {
@@ -110,13 +111,13 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
                        else{
                         setinfoPage(true)
                        }
-                    setformData({
-                        username: '',
-                        email: '',
-                        password: '',
-                        confirmPassword: '',
-                        captcha: '',
-                    });
+                    // setformData({
+                    //     username: '',
+                    //     email: '',
+                    //     password: '',
+                    //     confirmPassword: '',
+                    //     captcha: '',
+                    // });
                 } else {
                     throw new Error(response.statusText || 'Network response was not ok');
                 }
@@ -138,43 +139,45 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
     }, []);
 
     useEffect(() => {
-      const storedToken = localStorage.getItem('authToken');
-      if (storedToken) {
-        const fetchData = async () => {
-          try {
-            const response = await axios.get('/api/auth/me', {
-              headers: {
-                Authorization: `Bearer ${storedToken}`,
-              },
-            });
-          } catch (error) {
-            console.error('Authentication error:', error);
-            localStorage.removeItem('authToken');
-          }
-        };
+    //   const storedToken = localStorage.getItem('authToken');
+    //   if (storedToken) {
+    //     const fetchData = async () => {
+    //       try {
+    //         const response = await axios.get('/api/auth/me', {
+    //           headers: {
+    //             Authorization: `Bearer ${storedToken}`,
+    //           },
+    //         });
+    //       } catch (error) {
+    //         console.error('Authentication error:', error);
+    //         localStorage.removeItem('authToken');
+    //       }
+    //     };
   
-        fetchData();
-      }
+    //     fetchData();
+    //   }
     }, []);
 
     const handleCaptchaChange = (value) => {
         setIsCaptchaVerified(value);
     };
     useEffect(() => {
-        const checkEmailAvailability = async () => {
-            if (formData.email.trim() && sign === 'SIGN UP') {
-                try {
-                    const response = await fetch(`/api/users/check-email?email=${formData.email}`);
-                    const data = await response.json();
-                    if (data.isRegistered) {
-                        setErrors({ email: 'Email is already registered.' });
-                    }
-                } catch (error) {
-                    console.error('Error checking email availability:', error);
-                }
-            }
-        };
-        checkEmailAvailability();
+        // const checkEmailAvailability = async () => {
+        //     if (formData.email.trim() && sign === 'SIGN UP') {
+        //         try {
+        //             const response = await fetch(
+        //               `${API_BASE_URL}/auth/verify/check-email?email=${formData.email}`
+        //             );
+        //             const data = await response.json();
+        //             if (data.isRegistered) {
+        //                 setErrors({ email: 'Email is already registered.' });
+        //             }
+        //         } catch (error) {
+        //             console.error('Error checking email availability:', error);
+        //         }
+        //     }
+        // };
+        // checkEmailAvailability();
     }, [formData.email, sign]);
 
 

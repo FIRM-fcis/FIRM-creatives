@@ -1,0 +1,121 @@
+/* Dark background covering the entire screen */
+.project-details-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 110000;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  cursor: pointer;
+}
+
+.fullscreen-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+/* Central div to contain project details */
+.project-content {
+  width: 80%;
+  height: 90%;
+  background-color: #fff;
+  color: #000;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* User details section with user-details-details class */
+.user-details-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-details-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.username-details {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.close-details-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+    color: var(--main-color);
+    cursor: pointer;
+}
+/* Style for the project details like title, description, media, tools, and tags */
+.project-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.project-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.project-media {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* No padding between images and videos */
+}
+
+.project-image,
+.project-video {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.save-btn {
+  display: block;
+  margin: 20px 0;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.project-tools,
+.project-tags {
+  margin-top: 20px;
+}
+
+.project-tools ul,
+.project-tags ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.project-tools li,
+.project-tags li {
+  background-color: #333;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  color: #fff;
+}

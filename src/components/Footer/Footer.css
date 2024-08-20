@@ -1,0 +1,10 @@
+@import '../../Shares/main.css';
+
+.FIRM{
+    font-weight: bold;
+    transition:0.5s ease-in-out;
+}
+.FIRM:hover{
+    scale: 1.3;
+    color: var(--second-color) !important;
+}

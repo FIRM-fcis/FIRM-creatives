@@ -1,8 +1,11 @@
 import React from 'react'
 import './HomeAfterLogin.css'
+import ProjectManger from '../../components/ProjectManger/ProjectManger'
 const HomeAfterLogin = () => {
   return (
-    <div className='home-after-login'></div>
+    <div className='home-after-login'>
+      {/* <ProjectManger/> */}
+    </div>
   )
 }
 

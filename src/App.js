@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Login from './components/Login/Login'
 import { Navigate, Route, Routes } from 'react-router-dom'
@@ -12,6 +13,12 @@ import Profile from './pages/Profile/Profile'
 import EditProfileInfo from './components/EditProfileInfo/EditProfileInfo'
 import Logout from './components/Logout/Logout'
 import { assets } from './assets/assets'
+import Footer from "./components/Footer/Footer";
+import ProjectManger from "./components/ProjectManger/ProjectManger";
+import AddProject from "./pages/AddProject/AddProject";
+import AddOrEdditProject from "./pages/AddProject/AddProject";
+import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
+import handelApiCalls from './Shares/handelApiCalls'
 
 const App = () => {
   const [showSign,setShowSign]=useState(false)
@@ -33,16 +40,43 @@ const App = () => {
     links:[{title:'',url:''}],
     aboutMe:''
   })
+  const [projects, setProjects] = useState([
+    {
+      title: "test",
+      description:
+        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+      tools: [],
+      tags: [],
+      openToBeSaved: true,
+      images: [
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c7ff01113805317.602ee5a77bed8.jpg",
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/6d32ed147443521.62c2f40c6d81b.png",
+      ],
+      videos: [
+        "https://www-ccv.adobe.io/v1/player/ccv/VgHkrJk43Vy/embed?api_key=behance1&bgcolor=%23191919",
+      ],
+      ownerId: "",
+    },
+  ]);
+  const [projectEndPoint,setProjectEndPoint]=useState("")
 
-  const handleSign=(x)=>{
+  const handleSign = (x) => {
     setsign(x);
-  }
-  const handleInfoPage=(y)=>{
+  };
+  const handleInfoPage = (y) => {
     setinfoPage(y);
   }
   const handleNav=(z)=>{
     setnav(z);
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await handelApiCalls("projects?page=4&limit=4");
+      setProjects(data);
+    };
+
+    fetchData();
+  }, [projectEndPoint]);
   return (
     <>
     {showSign?<Login handleNav={handleNav} setShowSign={setShowSign} sign={sign} handleSign={handleSign} setinfoPage={setinfoPage} information={information} setInformation={setInformation}/>:<></>}
@@ -50,7 +84,8 @@ const App = () => {
        <div className='app'>
       <Navbar nav={nav} handleNav={handleNav} setShowSign={setShowSign} handleSign={handleSign} profilePicture={profilePicture} />  
          <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' element={<Home/>}>
+          </Route>
           <Route path='/home' element={<HomeAfterLogin/>}/>
           <Route path='/forgetPassword' element={<ForgetPassword/>}/>
           <Route path='/profile' element={<Profile profilePicture={profilePicture} setProfilePicture={setProfilePicture} />}>
@@ -62,9 +97,13 @@ const App = () => {
           <Route path='*' element={<PageNotFound nav={nav}/>}/>
          </Routes>
        </div>
+       {/* <ProjectManger projects={projects} /> */}
+      {/* <AddOrEdditProject project={[]} /> */}
+      <Footer />
     </>
  
   )
 }
 
-export default App
+  
+export default App;
