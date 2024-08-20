@@ -24,7 +24,7 @@
     align-items: center;
     gap: 40px;
 }
-.navbar .login , .navbar .signup , .navbar .hire-btn , .navbar .share-btn{
+.navbar .login , .navbar .signup , .navbar .share-btn{
     font-size: 16px;
     border: 1px solid var(--dark-color2);
     padding: 10px 30px;
@@ -33,7 +33,7 @@
     cursor: pointer;
     transition: 0.3s;
 }
-.navbar .login , .navbar .hire-btn{
+.navbar .login{
     background-color:transparent;
     color: var(--second-color);
 }
@@ -41,7 +41,7 @@
     background-color: var(--second-color);
     color: var(--main-color);
 }
-.navbar .login:hover  , .navbar .hire-btn:hover{
+.navbar .login:hover{
     background-color:rgba(231, 76, 60, 0.4);
     color:  var(--dark-color2);
 }
@@ -96,11 +96,8 @@
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
   padding-left: 20px;
 }
-.btn-search:focus ~ .input-search ,.input-search:focus {
+.btn-search:focus ~ .input-search ,.input-search:focus , .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
   width: 50vw;
-}
-.btn-search2:focus ~ .input-search2 ,.input-search2:focus {
-  width: 32vw;
 }
 .tooltip {
   visibility: hidden;
@@ -186,14 +183,11 @@
   .navbar-right{
     gap: 30px;
   }
-  .navbar .login , .navbar .signup , .navbar .hire-btn , .navbar .share-btn{
+  .navbar .login , .navbar .signup ,.navbar .share-btn{
     padding: 10px 25px;
   }
-  .btn-search:focus ~ .input-search ,.input-search:focus{
+  .btn-search:focus ~ .input-search ,.input-search:focus, .btn-search2:focus ~ .input-search2 ,.input-search2:focus{
     width: 40vw;
-  }
-  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
-    width: 28vw;
   }
   .tooltip {
     width: 30vw;
@@ -215,14 +209,11 @@
   .navbar-right{
     gap: 20px;
   }
-  .navbar .login , .navbar .signup , .navbar .hire-btn , .navbar .share-btn{
+  .navbar .login , .navbar .signup , .navbar .share-btn{
     padding: 8px 20px;
   }
-  .btn-search:focus ~ .input-search ,.input-search:focus{
+  .btn-search:focus ~ .input-search ,.input-search:focus , .btn-search2:focus ~ .input-search2 ,.input-search2:focus{
     width: 35vw;
-  }
-  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
-    width: 25vw;
   }
   .input-search ,.input-search2{
     height: 46px;
@@ -260,22 +251,12 @@
   .navbar-right{
     gap: 7px;
   }
-  .navbar .login , .navbar .signup{
+  .navbar .login , .navbar .signup , .navbar .share-btn{
     padding: 7px 12px;
   }
-  .navbar .hire-btn , .navbar .share-btn{
-    font-size: 10px;
-    padding: 10px 8px;
-    border-radius: 50px;
-    font-weight: 400;
-}
-  .btn-search:focus ~ .input-search ,.input-search:focus{
+  .btn-search:focus ~ .input-search ,.input-search:focus , .btn-search2:focus ~ .input-search2 ,.input-search2:focus{
     padding-left: 8px;
     width: 30vw;
-  }
-  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
-    padding-left: 8px;
-    width: 18vw;
   }
   .input-search::placeholder ,  .input-search2::placeholder{
     font-size: 14px;
@@ -321,23 +302,19 @@
   .navbar-right{
     gap: 5px;
   }
-  .navbar .login , .navbar .signup{
+  .navbar .login , .navbar .signup {
     padding: 6px 12px;
   }
-  .navbar .hire-btn , .navbar .share-btn{
+  .navbar .share-btn{
     font-size: 8px;
     padding: 8px 8px;
     border-radius: 50px;
     font-weight: 400;
 }
 
-  .btn-search:focus ~ .input-search ,.input-search:focus{
+  .btn-search:focus ~ .input-search ,.input-search:focus ,.btn-search2:focus ~ .input-search2 ,.input-search2:focus{
     padding-left: 8px;
     width: 28vw;
-  }
-  .btn-search2:focus ~ .input-search2 ,.input-search2:focus {
-    padding-left: 8px;
-    width: 20vw;
   }
   .input-search , .input-search2{
     height: 32px;

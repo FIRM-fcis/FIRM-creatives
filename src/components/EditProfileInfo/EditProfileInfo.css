@@ -166,10 +166,7 @@
   .profile-add-link:hover{
     background-color: var(--hover-color);
   }
-  .profile-resume{
-    color: var(--second-color);
-  }
-  .profile-resume::file-selector-button{
+  .resume-file-container button{
     border-radius: 4px;
     padding: 0 16px;
     height: 40px;
@@ -180,6 +177,12 @@
     transition: background-color 0.3s;
     margin: 15px 20px 15px 0px;
     font-weight: 600;
+  }
+  .resume-file-container button:hover{
+    background-color: var(--light-color);
+  }
+  .resume-file-container span{
+    color: var(--text-color);
   }
   .profile-save{
     text-align: center;

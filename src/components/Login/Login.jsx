@@ -4,7 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav }) => {
+const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information,setInformation }) => {
     const [formData, setformData] = useState({
         username: '',
         email: '',
@@ -18,7 +18,7 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav }) => {
     const [isFormCleared, setIsFormCleared] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api/v1';
+    const API_BASE_URL = 'http://localhost:3000/api/v1';
     const navigate = useNavigate();
 
     const handlechange = (e) => {
@@ -64,6 +64,9 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav }) => {
             setIsFormCleared(true);
             setShowSign(false);
             handleNav(true);
+            const rightNow = new Date().toISOString();
+            const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
+            setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
             if(sign === "LOGIN"){
                 navigate('/home');
                }
@@ -88,10 +91,19 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav }) => {
                     localStorage.setItem('authToken', token);
                   }
                     console.log(`${sign} successful!`, response.data);
+                    Swal.fire({
+                        title: "Signup successful!",
+                        text: "Please check your email for verification",
+                        icon: "success",
+                        timer: 10000,
+                      });
                     setIsSubmitting(true); 
                     setIsFormCleared(true);
                     setShowSign(false);
                     handleNav(true);
+                    const rightNow = new Date().toISOString();
+                    const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
+                    setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
                     if(sign === "LOGIN"){
                         navigate('/home');
                        }
@@ -207,10 +219,13 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav }) => {
                     </div>
                     :
                     <>
-                        <ReCAPTCHA name='captcha'
-                            sitekey="6LdQuxsqAAAAAKjcPsxeplE_XmYviiiES8sL_vcE"
-                            onChange={handleCaptchaChange}
-                        />
+                       <div className="recaptcha-container">
+                            <ReCAPTCHA
+                                name='captcha'
+                                sitekey="6LdQuxsqAAAAAKjcPsxeplE_XmYviiiES8sL_vcE"
+                                onChange={handleCaptchaChange}
+                            />
+                        </div>
                         {!isCaptchaVerified && <p className="captcha-error">Please complete the captcha to submit the form.</p>}
                     </>
                 }

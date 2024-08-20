@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../../assets/assets'
 import './Logout.css'
 import { useNavigate } from 'react-router-dom'
-const Logout = () => {
+const Logout = ({handleNav}) => {
     const navigate=useNavigate();
   return (
     <div className='logout-container'>
@@ -13,7 +13,7 @@ const Logout = () => {
             <p>Oh no! You're leaving...</p>
             <p>Are you sure?</p>
             <button onClick={()=>{navigate('/profile')}} className='logout-no'>NO, Cancel</button>
-            <button onClick={()=>{navigate('/')}} className='logout-yes'>Yes, Log Me Out</button>
+            <button onClick={()=>{navigate('/');handleNav(false)}} className='logout-yes'>Yes, Log Me Out</button>
         </div>
     </div>
   )

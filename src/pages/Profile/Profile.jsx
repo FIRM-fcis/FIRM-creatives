@@ -4,56 +4,40 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { assets } from '../../assets/assets'
 import { NavLink, Outlet } from 'react-router-dom'
-const Profile = () => {
-  const fileInputRef = useRef(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedPicture,setSelectedPicture]=useState(assets.profile_img);
+import {handleImageChange} from '../../Shares/handelInputs'
+const Profile = ({ profilePicture, setProfilePicture, forceUpdate  }) => {
+
+  const [selectedBannerImage, setSelectedBannerImage] = useState(null);
+  const bannerFileInputRef = useRef(null);
+  const profileFileInputRef = useRef(null);
   const activeStyle=({isActive})=>{
     return{
       color:isActive?"#e74c3c":"#191919",
       fontWeight:isActive?"bold":"400"
     }
   }
+
   const handleBannerImageClick = () => {
-    fileInputRef.current.click();
-  };
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        setSelectedImage(reader.result);   
-      };
-
-      reader.readAsDataURL(file); 
-
-    } else {
-      console.error('No file selected');
-    }
-  };
-  const handlePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        setSelectedPicture(reader.result);
-      };
-
-      reader.readAsDataURL(file); 
-
-    } else {
-      console.error('No file selected');
-    }
+    bannerFileInputRef.current.click();
   };
 
+  const handleProfileImageClick = () => {
+    profileFileInputRef.current.click();
+  };
+  const handleBannerImageChange = (event) => {
+  handleImageChange(event, setSelectedBannerImage);
+  };
+
+  const handleProfileImageChange = (event) => {
+    handleImageChange(event, setProfilePicture);
+  };
 
   return (
     <div className='profile'>
-      <div className='banner-image' onClick={handleBannerImageClick}>
-          {selectedImage ? (
-            <img src={selectedImage} alt="Bannerimage" className="banner-image" draggable='false' />
+      <div className='profile-top'>
+        <div className='banner-image'  onClick={handleBannerImageClick}>
+          {selectedBannerImage ? (
+            <img src={selectedBannerImage} alt="Bannerimage" className="banner-image" draggable='false' />
           ) : (
             <>
               <div className='banner-content'>
@@ -63,11 +47,12 @@ const Profile = () => {
             
             </>
           )}
-          <input type="file" accept="image/*" ref={fileInputRef} onChange={handleImageChange} style={{ display: 'none' }} />
-          <div className="profile-image">
+          <input type="file" accept="image/*" ref={bannerFileInputRef} onChange={handleBannerImageChange} style={{ display: 'none' }} />
+          </div>
+          <div className="profile-image"  onClick={handleProfileImageClick}>
             <div className="profile-image-border">
-              <img src={selectedPicture} alt="Profile picture" draggable='false' />
-              <input type="file" accept="image/*" ref={fileInputRef} onChange={handlePhotoChange} style={{ display: 'none' }} />
+              <img src={profilePicture} alt="Profile picture" draggable='false' />
+              <input type="file" accept="image/*" ref={profileFileInputRef} onChange={handleProfileImageChange} style={{ display: 'none' }} />
             </div>
           </div>   
       </div>

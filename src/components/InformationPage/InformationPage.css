@@ -7,9 +7,12 @@
     background-color:var(--overlay-color);
     display: grid;
 }
+.input-container-links{
+    padding-top:30px ;
+}
 .information-page-container{
     place-self: center;
-    width: max(24vw,330px);
+    width: max(24vw,350px);
     color:var(--text-color);
     background-color:var(--dark-color2);
     display: flex;
@@ -33,8 +36,19 @@
  outline:none;
  border-bottom:1px solid var(--second-color);
 }
-.input-container input:focus ~ label,
-.input-container textarea:focus ~ label
+.information-page .input-container label{
+	position:absolute;
+	top:-8px;
+	left:0px;
+	font-size:16px;
+	color:var(--main-color);	
+	transition: all 0.5s ease-in-out;
+}
+
+.information-page .input-container input:focus ~ label,
+.information-page .input-container textarea:focus ~ label,
+.information-page .input-container input:valid ~ .info-label
+.information-page .input-container textarea:valid ~ .info-label
 {
 	top:-12px; 
 	font-size:12px;

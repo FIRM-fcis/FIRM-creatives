@@ -9,7 +9,7 @@
 }
 .login-container{
     place-self: center;
-    width: max(24vw,330px);
+    width: max(24vw,350px);
     color:var(--text-color);
     background-color:var(--dark-color2);
     display: flex;
@@ -37,7 +37,7 @@
 	position:relative;
 	margin-bottom:15px;
 }
-.input-container label{
+.login-container .input-container label{
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -75,20 +75,44 @@
 .login-btn:hover{
     background-color: var(--hover-color);
 }
-.input-container input:focus ~ .info-label,
-.input-container input:valid ~ .info-label{
-	top:-12px;
-	font-size:12px;
+.login-container .input-container input:focus ~ .info-label,
+.login-container .input-container input:valid ~ .info-label {
+  top: -12px;
+  font-size: 12px;
 }
 .switch{
     color: var(--second-color);	
     font-weight: 500;
     cursor: pointer;
 }
-.verification-notice{
-    font-size: 18px;
-    color: green;
-}
+.recaptcha-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .checkbox input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .forgot-password-container {
+    text-align: right;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color:var(--second-color);	
+    text-decoration: none;
+  }
+  
+  .forgot-password-container:hover {
+    text-decoration: underline;
+  }
 @media (max-width:1300px) {
     .login-container{
         padding: 30px 18px;
@@ -98,26 +122,4 @@
 .login-container{
     padding: 30px 15px;
 }
-}
-.checkbox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.checkbox input[type="checkbox"] {
-  margin-right: 5px;
-}
-
-.forgot-password-container {
-  text-align: right;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color:var(--second-color);	
-  text-decoration: none;
-}
-
-.forgot-password-container:hover {
-  text-decoration: underline;
 }

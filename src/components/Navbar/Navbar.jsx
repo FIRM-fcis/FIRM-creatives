@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,7 +6,7 @@ import {faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import SearchList from '../SearchList/SearchList'
-const Navbar = ({setShowSign,handleSign,nav}) => {
+const Navbar = ({setShowSign,handleSign,nav, profilePicture  }) => {
   const [input,setinput]=useState("");
   const [results,setresults]=useState([]);
   const [showSearchList,setshowSearchList]=useState(false);
@@ -43,17 +43,15 @@ const Navbar = ({setShowSign,handleSign,nav}) => {
                 showSearchList?<SearchList results={results} />
                 :<></>
               }
-            
             </div>
         <div className='navbar-right'>
           {nav?<>
-            <button className='hire-btn'>Hire Freelancers</button>
             <button className='share-btn'>Share Your Work</button>
             <div className="profile-img-container">
-            <Link to='/profile'><img src={assets.profile} alt='Profile Photo' draggable='false' className='profile-img'/></Link>
+            <Link to='/profile'><img src={profilePicture} alt='Profile Photo' draggable='false' className='profile-img'/></Link>
               <div className="tooltip">
                 <div className="tooltip-img-frame">
-                <img src={assets.profile} alt='Profile Photo' draggable='false' className='tooltip-img'/>
+                <img src={profilePicture} alt='Profile Photo' draggable='false' className='tooltip-img'/>
                 </div>
                 <p>Dareen Housam</p>
                 <p>dareenhousam6@gmail.com</p>
