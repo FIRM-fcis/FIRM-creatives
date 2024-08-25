@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Profile.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { assets } from '../../assets/assets'
 import { NavLink, Outlet } from 'react-router-dom'
-import {handleImageChange} from '../../Shares/handelInputs'
-const Profile = ({ profilePicture, setProfilePicture, forceUpdate  }) => {
+import {handelFunctions} from '../../Shares/handelInputs'
+const Profile = ({ profilePicture, setProfilePicture,information,setInformation  }) => {
 
   const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   const bannerFileInputRef = useRef(null);
@@ -25,13 +25,16 @@ const Profile = ({ profilePicture, setProfilePicture, forceUpdate  }) => {
     profileFileInputRef.current.click();
   };
   const handleBannerImageChange = (event) => {
-  handleImageChange(event, setSelectedBannerImage);
+    handelFunctions.handleImageChange(event, setSelectedBannerImage,information,setInformation,true);
   };
 
   const handleProfileImageChange = (event) => {
-    handleImageChange(event, setProfilePicture);
+    handelFunctions.handleImageChange(event, setProfilePicture,information,setInformation,false);
   };
-
+  // useEffect(() => {
+  //   setInformation({...information,profilePicture:profilePicture});
+  //   setInformation({...information,bannerPicture:selectedBannerImage});
+  // }, [profilePicture,selectedBannerImage,selectedBannerImage,setProfilePicture]);
   return (
     <div className='profile'>
       <div className='profile-top'>

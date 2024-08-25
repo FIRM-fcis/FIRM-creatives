@@ -6,7 +6,7 @@ import {faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import SearchList from '../SearchList/SearchList'
-const Navbar = ({setShowSign,handleSign,nav, profilePicture  }) => {
+const Navbar = ({setShowSign,handleSign,nav, profilePicture,information  }) => {
   const [input,setinput]=useState("");
   const [results,setresults]=useState([]);
   const [showSearchList,setshowSearchList]=useState(false);
@@ -53,8 +53,8 @@ const Navbar = ({setShowSign,handleSign,nav, profilePicture  }) => {
                 <div className="tooltip-img-frame">
                 <img src={profilePicture} alt='Profile Photo' draggable='false' className='tooltip-img'/>
                 </div>
-                <p>Dareen Housam</p>
-                <p>dareenhousam6@gmail.com</p>
+                <p>{information.username}</p>
+                <p>{information.email}</p>
                 <button onClick={()=>{navigate('/profile')}}>Your Profile</button>
               </div>
             </div>

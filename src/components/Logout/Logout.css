@@ -3,9 +3,8 @@
     width: 50vw;
     border: 5px solid var(--second-color);
     border-radius: 15px;
-    margin: auto;
     text-align: center;
-    margin-top: 50px;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

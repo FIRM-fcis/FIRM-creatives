@@ -29,7 +29,7 @@ const App = () => {
   const [information,setInformation]=useState({
     username: '',
     email: '',
-    profilePicture: null,
+    profilePicture:null,
     bannerPicture: null,
     address: '',
     availability: null,
@@ -82,13 +82,13 @@ const App = () => {
     {showSign?<Login handleNav={handleNav} setShowSign={setShowSign} sign={sign} handleSign={handleSign} setinfoPage={setinfoPage} information={information} setInformation={setInformation}/>:<></>}
     {infoPage?<InformationPage handleInfoPage={handleInfoPage} information={information} setInformation={setInformation}/>:<></>}
        <div className='app'>
-      <Navbar nav={nav} handleNav={handleNav} setShowSign={setShowSign} handleSign={handleSign} profilePicture={profilePicture} />  
+      <Navbar nav={nav} handleNav={handleNav} setShowSign={setShowSign} handleSign={handleSign} profilePicture={profilePicture} information={information}/>  
          <Routes>
           <Route path='/' element={<Home/>}>
           </Route>
           <Route path='/home' element={<HomeAfterLogin/>}/>
           <Route path='/forgetPassword' element={<ForgetPassword/>}/>
-          <Route path='/profile' element={<Profile profilePicture={profilePicture} setProfilePicture={setProfilePicture} />}>
+          <Route path='/profile' element={<Profile profilePicture={profilePicture} setProfilePicture={setProfilePicture} information={information} setInformation={setInformation} />}>
             <Route index element={<Navigate replace to="projects"/>}/>
             <Route path='projects' element={<Home/>}/>
             <Route path='editProile' element={<EditProfileInfo information={information} setInformation={setInformation}/>}/>
@@ -97,7 +97,7 @@ const App = () => {
           <Route path='*' element={<PageNotFound nav={nav}/>}/>
          </Routes>
        </div>
-       {/* <ProjectManger projects={projects} /> */}
+     {/* <ProjectManger projects={projects} />  */}
       {/* <AddOrEdditProject project={[]} /> */}
       <Footer />
     </>
