@@ -54,12 +54,12 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
         setErrors(validationErrors)
 
         if (Object.keys(validationErrors).length === 0 && isCaptchaVerified) {
-            // Swal.fire({
-            //     title: "Signup successful!",
-            //     text: "Please check your email for verification",
-            //     icon: "success",
-            //     timer: 10000,
-            //   });
+            Swal.fire({
+                title: "Signup successful!",
+                text: "Please check your email for verification",
+                icon: "success",
+                timer: 10000,
+              });
             setIsSubmitting(true); 
             setIsFormCleared(true);
             setShowSign(false);

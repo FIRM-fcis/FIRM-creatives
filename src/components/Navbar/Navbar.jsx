@@ -10,6 +10,7 @@ const Navbar = ({setShowSign,handleSign,nav, profilePicture  }) => {
   const [input,setinput]=useState("");
   const [results,setresults]=useState([]);
   const [showSearchList,setshowSearchList]=useState(false);
+  const navigate = useNavigate(); 
   const fetchData=(value)=>{
     axios("https://jsonplaceholder.typicode.com/albums")
     .then((response)=>{
@@ -31,7 +32,11 @@ const Navbar = ({setShowSign,handleSign,nav, profilePicture  }) => {
   const handleBlur=()=>{
     setshowSearchList(false);
   }
-  const navigate = useNavigate();
+
+  const handelShare = ()=>{
+    navigate("/projectEdit/newProject");
+  }
+
 
   return (
     <div className='navbar'>
@@ -46,7 +51,7 @@ const Navbar = ({setShowSign,handleSign,nav, profilePicture  }) => {
             </div>
         <div className='navbar-right'>
           {nav?<>
-            <button className='share-btn'>Share Your Work</button>
+            <button className='share-btn' onClick={handelShare}>Share Your Work</button>
             <div className="profile-img-container">
             <Link to='/profile'><img src={profilePicture} alt='Profile Photo' draggable='false' className='profile-img'/></Link>
               <div className="tooltip">

@@ -5,6 +5,9 @@
     width: 50px;
 } */
 
+.z-100{
+  z-index:1;
+}
 .project-container {
   position: relative;
   width: 100%; /* Set the width to 110% of the height */
@@ -32,7 +35,7 @@
   height: 90%;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  z-index: 1; /* Ensure it is above the background image */
+  /* z-index: 0; Ensure it is above the background image */
 }
 
 .user-info {

@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <div className="home">
-        {/* <ProjectManger /> */}
+        <ProjectManger />
       </div>
       <Outlet />
     </>

@@ -1,30 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./AddProject.css";
 import AddContent from "../../components/AddContent/AddContent";
 import StartBuildingProject from "../../components/StartBuildingProject/StartBuildingProject";
 import BuildingProject from "../../components/BuildingProject/BuildingProject";
-
+import { AppContext } from "../../Providers/AppProvider";
+import { useParams } from "react-router-dom";
+import handelApi from "../../Shares/handelApiCalls";
 const AddOrEdditProject = () => {
-  const [project, setProject] = useState({
-    title: "",
-    description: "",
-    tools: [],
-    tags: [],
-    openToBeSaved: false,
-    images: [],
-    videos: [],
-    ownerId: "",
-  });
+  const { token, information } = useContext(AppContext);
+  const projectId = useParams();
+  const [project, setProject] = useState([
+    {
+      title: "",
+      ownerId: information._id,
+      description: "",
+      tools: [],
+      tags: [],
+      openToBeSaved: true,
+      images: [],
+      videos: [],
+    },
+  ]);
+  useEffect(() => {
+    console.log(projectId);
+
+    const fetchData = async () => {
+      console.log(token);
+
+      const data = await handelApi.getProjectById(
+        `projects`,
+        projectId.projectId,
+        token
+      );
+      setProject(data);
+    };
+    if (projectId.projectId !== "newProject") fetchData();
+  }, []);
   return (
     <div className="container t-center hv-100">
       <div className="row hv-100 d-flex py-5 align-items-start ">
         <div className="col-10 hv-100">
           <div className="overflow-custom hv-90">
-            {project.images.length > 0 ||
-            project.videos.length > 0 ||
+            {project.images ||
+            project.videos ||
             project.title ||
-            project.tags.length > 0 ||
-            project.tools.length > 0 ||
+            project.tags ||
+            project.tools ||
             project.description ? (
               <BuildingProject project={project} setProject={setProject} />
             ) : (
@@ -33,7 +54,11 @@ const AddOrEdditProject = () => {
           </div>
         </div>
         <div className="col-2 justify-content-center align-items-center d-flex">
-          <AddContent project={project} setProject={setProject} />
+          <AddContent
+            project={project}
+            setProject={setProject}
+            projectid={projectId.projectId}
+          />
         </div>
       </div>
     </div>

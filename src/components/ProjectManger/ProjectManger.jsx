@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ProjectManger.css";
 import Project from "../Project/Project";
-const ProjectManger = ({ projects }) => {
+import { AppContext } from "../../Providers/AppProvider";
+const ProjectManger = () => {
+  const {projects}= useContext(AppContext)
   return (
     <>
       <div className="container py-5">

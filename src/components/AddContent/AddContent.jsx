@@ -1,7 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./AddContent.css";
 import { handelFunctions } from "../../Shares/handelInputs";
-const AddContent = ({ project, setProject }) => {
+import handelApi from '../../Shares/handelApiCalls'
+import { AppContext } from "../../Providers/AppProvider";
+const AddContent = ({ project, setProject, projectid }) => {
+  const { token } = useContext(AppContext);
+  // setToken("")
+  const handelSave = () => {
+    if (project.title && project.ownerID) {
+      handelApi.postData("projects/add", project, token);
+    } else {
+      console.log("invalid");
+    }
+  };
+  const handelUpdata = () => {
+    if (project.title && project.ownerID) {      
+      handelApi.patchData("projects/update", project,projectid, token);
+    } else {
+      console.log("invalid");
+    }
+  };
+  console.log(project);
+
   return (
     <div className="sidebar">
       <div className="section-title">Add Content</div>
@@ -42,9 +62,7 @@ const AddContent = ({ project, setProject }) => {
 
         <label
           className="option hover-color-change cursor-pointer"
-          onClick={() =>
-            handelFunctions.DescriptionChange(setProject, project)
-          }
+          onClick={() => handelFunctions.DescriptionChange(setProject, project)}
         >
           <i className="fa-solid fa-note-sticky"></i>
           <span>Description</span>
@@ -65,6 +83,11 @@ const AddContent = ({ project, setProject }) => {
           <i className="fa-solid fa-tags"></i>
           <span>Tags</span>
         </label>
+        {projectid === "newProject" ? (
+          <button onClick={handelSave}>Save</button>
+        ) : (
+          <button onClick={handelUpdata}>Updata</button>
+        )}
       </div>
     </div>
   );

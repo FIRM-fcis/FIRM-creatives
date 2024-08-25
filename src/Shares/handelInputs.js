@@ -14,7 +14,11 @@ export const handelFunctions = {
 
   VideoUpload: (event, func, project) => {
     const file = event.target.files[0];
-    const newVideoArray = [...project.videos, URL.createObjectURL(file)];
+    if (!file) return;
+    const newVideoArray = [
+      ...(project.videos || []),
+      URL.createObjectURL(file),
+    ];
     func({ ...project, videos: newVideoArray });
     // Additional processing can be done here
   },

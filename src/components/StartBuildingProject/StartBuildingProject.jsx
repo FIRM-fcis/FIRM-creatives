@@ -2,6 +2,8 @@ import React from "react";
 import "./StartBuildingProject.css";
 import { handelFunctions } from "../../Shares/handelInputs";
 const StartBuildingProject = ({ project, setProject }) => {
+  console.log(project);
+  
   return (
     <div className="d-flex-center flex-column window-height">
       <p className="display-6 py-2">Start building your project:</p>
