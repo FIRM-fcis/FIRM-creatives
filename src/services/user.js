@@ -116,8 +116,5 @@ export const updateProfile = async (userId, userData) => {
   }
 
   // update the user profile
-  const updatedUser = await User.updateOne({ _id: userId }, { ...userData });
-
-  // return the updated user
-  return updatedUser;
+  await User.updateOne({ _id: userId }, { ...userData });
 };

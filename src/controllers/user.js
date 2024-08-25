@@ -68,11 +68,11 @@ export const unfollowUser = async (req, res, next) => {
 export const updateProfile = async (req, res, next) => {
   try {
     const userId = req.userId;
-    const user = await userService.updateProfile(userId, req.body);
+    await userService.updateProfile(userId, req.body);
 
     return res.status(200).json({
       message: "Profile updated successfully",
-      body: user,
+      body: null,
       status: 200,
     });
   } catch (error) {
