@@ -4,7 +4,7 @@ import ExpressMongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
 import helmet from "helmet";
 import cors from "cors";
-import csurf from "csurf";
+// import csurf from "csurf";
 import connectDB from "./src/DB/config.js";
 import userRouter from "./src/routes/user.js";
 import authRouter from "./src/routes/auth.js";
@@ -27,14 +27,14 @@ app.use(express.json());
 // Set security HTTP headers
 app.use(helmet());
 
+// Enable CSRF protection
+// app.use(csurf({ cookie: true }));
+
 // Data sanitization against NoSQL query injection
 app.use(ExpressMongoSanitize());
 
 // Data sanitization against XSS
 app.use(xss());
-
-// Enable CSRF protection
-app.use(csurf({ cookie: true }));
 
 const baseUrl = process.env.BASE_URL;
 // Define a route handler for the default home page

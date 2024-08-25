@@ -101,3 +101,23 @@ export const unfollowUser = async (followingId, followerId) => {
   // decrement the followers count of the followerId
   await User.updateOne({ _id: followingId }, { $inc: { followers: -1 } });
 };
+
+export const updateProfile = async (userId, userData) => {
+  // check if the userId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
+  if (userId.length !== 24 && !(userId instanceof Uint8Array) && isNaN(userId)) {
+    throw createCustomError("Invalid user id", 400, null);
+  }
+
+  // check if the userId is existed
+  const user = await User.find({ _id: userId });
+
+  if (!user) {
+    throw createCustomError("User not found", 404, null);
+  }
+
+  // update the user profile
+  const updatedUser = await User.updateOne({ _id: userId }, { ...userData });
+
+  // return the updated user
+  return updatedUser;
+};

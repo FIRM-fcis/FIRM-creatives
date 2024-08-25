@@ -16,5 +16,6 @@ router.post("/follow/:followingId", authorize, userController.followUser);
 // route to unfollow a user
 router.post("/unfollow/:followingId", authorize, userController.unfollowUser);
 
-
+// route to update profile
+router.put("/update", authorize, userController.updateProfile);
 export default router;
