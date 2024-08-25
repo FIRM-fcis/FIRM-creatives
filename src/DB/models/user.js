@@ -64,6 +64,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  about_me: {
+    type: String,
+    default: null,
+  },
 });
 
 // Create a model for the user schema
