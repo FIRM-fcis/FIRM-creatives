@@ -1,6 +1,8 @@
 import { Router } from "express";
 import * as projectController from "../controllers/project.js";
 import authorize from "../middlewares/authorize.js";
+import validate from "../middlewares/validators/validate.js";
+import * as projectSchemas from "../middlewares/validators/schemas/project.js";
 
 const router = Router();
 
@@ -14,7 +16,7 @@ router.get("/:projectID", authorize, projectController.getProjectById);
 router.get("/user/:userID", projectController.getProjectByUserID);
 
 // route to create a new project
-router.post("/add", authorize, projectController.createProject);
+router.post("/add", authorize, validate(projectSchemas.createProjectSchema), projectController.createProject);
 
 // route to update project by id
 router.patch("/update/:projectID", authorize, projectController.updateProject);

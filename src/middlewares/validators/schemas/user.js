@@ -36,3 +36,4 @@ export const loginSchema = Joi.object({
     'any.required': 'Password is required',
   }),
 });
+

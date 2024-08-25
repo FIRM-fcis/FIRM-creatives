@@ -12,6 +12,9 @@ import mongoose from "mongoose";
 // - availability: a string that has a default value of null
 // - following: set to zero
 // - followers: set to zero
+// - emailVerified: set to false
+// - emailVerificationToken: a string that has a default value of null
+// - about_me: a string that has a default value of null
 
 const userSchema = new mongoose.Schema({
   username: {
