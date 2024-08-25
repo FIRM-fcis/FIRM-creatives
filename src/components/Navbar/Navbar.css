@@ -101,10 +101,10 @@
 }
 .tooltip {
   visibility: hidden;
-  z-index: 1;
+  z-index: 1000;
   opacity: .40;
   width: 20vw;
-  height: 250px;
+  min-height: 250px;
   padding: 20px;
   background: var(--dark-color2);
   color: var(--main-color);
@@ -229,7 +229,6 @@
   }
    .tooltip {
     width: 30vw;
-    height: 250px;
     padding: 20px 15px;
     top:80px;
     left: -25vw;
@@ -276,7 +275,6 @@
   }
   .tooltip {
     width: 55vw;
-    height: 250px;
     padding: 20px 10px;
     top:80px;
     left: -50vw;
@@ -331,7 +329,6 @@
   }
   .tooltip {
     width: 60vw;
-    height: 250px;
     padding: 20px 10px;
     top:60px;
     left: -55vw;

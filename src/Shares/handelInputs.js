@@ -84,7 +84,7 @@ export const handelFunctions = {
       func((prevProject) => ({ ...prevProject, tags: newTagsArray }));
     }
   },
-  handleImageChange: (event, setImage) => {
+  handleImageChange: (event, setImage,info,setinfo,flag) => {
     const files = event.target.files;
 
     if (files && files.length > 0) {
@@ -95,6 +95,13 @@ export const handelFunctions = {
 
         reader.onload = () => {
           setImage(reader.result);
+          if(flag===true){
+            setinfo({...info,bannerPicture:reader.result})
+          }
+          else{
+            setinfo({...info,profilePicture:reader.result})
+          }
+          
         };
 
         reader.readAsDataURL(file);
@@ -104,26 +111,5 @@ export const handelFunctions = {
     } else {
       console.error("No file selected");
     }
-  },
-};
-export const handleImageChange = (event, setImage) => {
-  const files = event.target.files;
-
-  if (files && files.length > 0) {
-    const file = files[0];
-
-    if (file instanceof File) {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        setImage(reader.result);
-      };
-
-      reader.readAsDataURL(file);
-    } else {
-      console.error("Invalid file object");
-    }
-  } else {
-    console.error("No file selected");
   }
 };

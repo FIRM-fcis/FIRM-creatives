@@ -6,13 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information,setInformation }) => {
     const [formData, setformData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
         // captcha: ''
-    })
-    const [errors, setErrors] = useState({})
+    });
+    const [errors, setErrors] = useState({});
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isFormCleared, setIsFormCleared] = useState(false);
@@ -28,13 +28,19 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
         })
     }
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setLoading(true);
         const validationErrors = {}
-        if (!formData.username.trim()) {
-            validationErrors.username = "username is required"
+        if(sign==='SIGN UP'){
+            if (formData.username.length < 3 || formData.username.length > 30) {
+                validationErrors.username = "Username must be between 3 and 30 characters";
+            } else if (!formData.username.trim()) {
+            validationErrors.username = "Username is required";
+            }
+            if (formData.confirmPassword !== formData.password) {
+                validationErrors.confirmPassword = "password not matched"
+            }
         }
-
         if (!formData.email.trim()) {
             validationErrors.email = "email is required"
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -47,31 +53,30 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
             validationErrors.password = "  8 to 24 characters.\nMust include uppercase and lowercase letters, a number and a special character.\n  Allowed special characters: ! @ # $ %"
         }
 
-        if (formData.confirmPassword !== formData.password) {
-            validationErrors.confirmPassword = "password not matched"
-        }
-
         setErrors(validationErrors)
-
-        if (Object.keys(validationErrors).length === 0 && isCaptchaVerified) {
-            Swal.fire({
-                title: "Signup successful!",
-                text: "Please check your email for verification",
-                icon: "success",
-                timer: 10000,
-              });
+        if ((Object.keys(validationErrors).length === 0 && isCaptchaVerified && sign==='SIGN UP')||(Object.keys(validationErrors).length === 0 &&sign==='LOGIN')) {
+            const successMessage = sign === 'SIGN UP'
+            ? 'Signup successful! Please check your email for verification.'
+            : 'Login successful!';
+      
+          Swal.fire({
+            title: successMessage,
+            icon: 'success',
+            timer: 10000,
+          });
             setIsSubmitting(true); 
             setIsFormCleared(true);
             setShowSign(false);
             handleNav(true);
-            const rightNow = new Date().toISOString();
-            const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
-            setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
+            
             if(sign === "LOGIN"){
                 navigate('/home');
                }
                else{
                 setinfoPage(true);
+                const rightNow = new Date().toISOString();
+                const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
+                setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
                }
             //    setformData({
             //     username: '',
@@ -82,34 +87,45 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
             // });
             try {
                 const url = sign === 'SIGN UP'? `${API_BASE_URL}/auth/signup` :`${API_BASE_URL}/auth/login`;
-                const response = await axios.post(url, formData, {
+
+                const loginData = sign === 'LOGIN'
+                    ? { email: formData.email, password: formData.password }
+                    : formData;
+                const response = await axios.post(url, loginData, {
                     headers: { 'Content-Type': 'application/json' },
                 });
-                
+
+                console.log(response);
                 if (response.status === 200 || response.status === 201) {
+                    
                   const token = response.data.token;
                   if (rememberMe) {
                     localStorage.setItem('authToken', token);
                   }
                     console.log(`${sign} successful!`, response.data);
-                    Swal.fire({
-                        title: "Signup successful!",
-                        text: "Please check your email for verification",
-                        icon: "success",
-                        timer: 10000,
-                      });
+                    const successMessage = sign === 'SIGN UP'
+                    ? 'Signup successful! Please check your email for verification.'
+                    : 'Login successful!';
+              
+                  Swal.fire({
+                    title: successMessage,
+                    icon: 'success',
+                    timer: 10000,
+                  });
                     setIsSubmitting(true); 
                     setIsFormCleared(true);
                     setShowSign(false);
                     handleNav(true);
-                    const rightNow = new Date().toISOString();
-                    const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
-                    setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
+                   
                     if(sign === "LOGIN"){
                         navigate('/home');
+                        setInformation({...information,username:formData.username,email:formData.email})
                        }
                        else{
                         setinfoPage(true)
+                        const rightNow = new Date().toISOString();
+                        const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
+                        setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
                        }
                     // setformData({
                     //     username: '',
@@ -119,23 +135,31 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
                     //     captcha: '',
                     // });
                 } else {
+                   
                     throw new Error(response.statusText || 'Network response was not ok');
                 }
             } catch (error) {
+                
                 console.error('Error:', error);
                 const errorData = error.response?.data;
                 setErrors({ apiError: errorData?.message || 'An error occurred during submission.' });
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text:  errorData?.message ,
+                  });
             } finally {
                 setIsSubmitting(false);
                 setLoading(false);
             }
-          } else {
-            setLoading(false); 
-          }
-        };
+        }else {
+        setLoading(false); 
+        }
+    };
 
     useEffect(() => {
         setIsFormCleared(false);
+        // setformData({username:'',email:'',password:'',confirmPassword:''})
     }, []);
 
     useEffect(() => {
@@ -183,7 +207,7 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
 
     return (
         <div className='log-in'>
-            <form className="login-container" onSubmit={handleSubmit}>
+            <form className="login-container" onSubmit={handleSubmit} action={sign==='SIGN UP'?`${API_BASE_URL}/auth/signup`:`${API_BASE_URL}/auth/login`} method="POST"> 
                 <div className="login-title">
                     <span className='text-center'>{sign}</span>
                     <p className='close-login' onClick={() => setShowSign(false)}>X</p>
@@ -241,7 +265,7 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
                 <button
                     type="submit"
                     className='login-btn'
-                    disabled={!isCaptchaVerified || isSubmitting}
+                    disabled={sign==='SIGN UP'?!isCaptchaVerified || isSubmitting:isSubmitting}
                 >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>

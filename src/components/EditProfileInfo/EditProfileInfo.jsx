@@ -5,7 +5,7 @@ const EditProfileInfo = ({information,setInformation}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const resumeFileInputRef = useRef(null);
   const handleProfileUpdate = () => {
-  //  console.log(profileData)
+  console.log(information);
   }
   const handleResumeClick = () => {
     resumeFileInputRef.current.click();

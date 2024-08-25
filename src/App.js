@@ -91,51 +91,49 @@ const App = () => {
       ) : (
         <></>
       )}
-        <div className="app">
-          <Navbar
-            nav={nav}
-            handleNav={handleNav}
-            setShowSign={setShowSign}
-            handleSign={handleSign}
-            profilePicture={profilePicture}
-          />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            
-            <Route path="/home" element={<HomeAfterLogin />} />
-            <Route path="/forgetPassword" element={<ForgetPassword />} />
+      <div className="app">
+        <Navbar
+          nav={nav}
+          handleNav={handleNav}
+          setShowSign={setShowSign}
+          handleSign={handleSign}
+          profilePicture={profilePicture}
+          information={information}
+        />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/home" element={<HomeAfterLogin />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                profilePicture={profilePicture}
+                setProfilePicture={setProfilePicture}
+                information={information}
+                setInformation={setInformation}
+              />
+            }
+          >
+            <Route index element={<Navigate replace to="projects" />} />
+            <Route path="projects" element={<Home />} />
             <Route
-              path="/profile"
+              path="editProile"
               element={
-                <Profile
-                  profilePicture={profilePicture}
-                  setProfilePicture={setProfilePicture}
+                <EditProfileInfo
+                  information={information}
+                  setInformation={setInformation}
                 />
               }
-            >
-              <Route index element={<Navigate replace to="projects" />} />
-              <Route path="projects" element={<Home />} />
-              <Route
-                path="editProile"
-                element={
-                  <EditProfileInfo
-                    information={information}
-                    setInformation={setInformation}
-                  />
-                }
-              />
-              <Route path="logout" element={<Logout handleNav={handleNav} />} />
-            </Route>
-            <Route
-              path="/projectEdit/:projectId"
-              element={<AddOrEdditProject />}
             />
-            <Route path="*" element={<PageNotFound nav={nav} />} />
-          </Routes>
-        </div>
-        {/* <ProjectManger projects={projects} /> */}
-        {/* <AddOrEdditProject /> */}
-        <Footer />
+            <Route path="logout" element={<Logout handleNav={handleNav} />} />
+          </Route>
+          <Route path="*" element={<PageNotFound nav={nav} />} />
+        </Routes>
+      </div>
+      {/* <ProjectManger projects={projects} />  */}
+      {/* <AddOrEdditProject project={[]} /> */}
+      <Footer />
     </>
   );
 };
