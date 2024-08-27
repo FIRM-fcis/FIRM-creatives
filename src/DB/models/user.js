@@ -15,6 +15,7 @@ import mongoose from "mongoose";
 // - emailVerified: set to false
 // - emailVerificationToken: a string that has a default value of null
 // - about_me: a string that has a default value of null
+// - links: an array of objects of title and url that has a default value of an empty array
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -75,6 +76,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  links: {
+    type: Array,
+    default: []
+  }
 });
 
 // Create a model for the user schema
