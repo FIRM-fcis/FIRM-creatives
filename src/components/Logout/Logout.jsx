@@ -13,7 +13,8 @@ const Logout = ({handleNav}) => {
             <p>Oh no! You're leaving...</p>
             <p>Are you sure?</p>
             <button onClick={()=>{navigate('/profile')}} className='logout-no'>NO, Cancel</button>
-            <button onClick={()=>{navigate('/');handleNav(false)}} className='logout-yes'>Yes, Log Me Out</button>
+            <button onClick={()=>{navigate('/');handleNav(false);localStorage.removeItem('authToken');
+            localStorage.removeItem('userId');}} className='logout-yes'>Yes, Log Me Out</button>
         </div>
     </div>
   )

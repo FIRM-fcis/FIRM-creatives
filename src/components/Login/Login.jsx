@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Login.css'
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useJwt } from "react-jwt";
+import handelApi from "../../Shares/handelApiCalls";
 const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information,setInformation }) => {
     const [formData, setformData] = useState({
         username: "",
@@ -19,6 +21,9 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
     const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
     const API_BASE_URL = 'http://localhost:3000/api/v1';
+    const tokenRef = useRef(null);
+    const decodedTokenRef = useRef(null);
+    const { decodedToken, isExpired } = useJwt(tokenRef.current);
     const navigate = useNavigate();
 
     const handlechange = (e) => {
@@ -29,6 +34,8 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true); 
+        
         setLoading(true);
         const validationErrors = {}
         if(sign==='SIGN UP'){
@@ -55,36 +62,6 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
 
         setErrors(validationErrors)
         if ((Object.keys(validationErrors).length === 0 && isCaptchaVerified && sign==='SIGN UP')||(Object.keys(validationErrors).length === 0 &&sign==='LOGIN')) {
-            const successMessage = sign === 'SIGN UP'
-            ? 'Signup successful! Please check your email for verification.'
-            : 'Login successful!';
-      
-          Swal.fire({
-            title: successMessage,
-            icon: 'success',
-            timer: 10000,
-          });
-            setIsSubmitting(true); 
-            setIsFormCleared(true);
-            setShowSign(false);
-            handleNav(true);
-            
-            if(sign === "LOGIN"){
-                navigate('/home');
-               }
-               else{
-                setinfoPage(true);
-                const rightNow = new Date().toISOString();
-                const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
-                setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
-               }
-            //    setformData({
-            //     username: '',
-            //     email: '',
-            //     password: '',
-            //     confirmPassword: '',
-            //     captcha: '',
-            // });
             try {
                 const url = sign === 'SIGN UP'? `${API_BASE_URL}/auth/signup` :`${API_BASE_URL}/auth/login`;
 
@@ -94,14 +71,23 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
                 const response = await axios.post(url, loginData, {
                     headers: { 'Content-Type': 'application/json' },
                 });
-
                 console.log(response);
                 if (response.status === 200 || response.status === 201) {
-                    
-                  const token = response.data.token;
-                  if (rememberMe) {
-                    localStorage.setItem('authToken', token);
-                  }
+                    if(sign === 'LOGIN'){
+                        tokenRef.current = response.data.body.access_token;
+                        
+                        localStorage.setItem('authToken', rememberMe ? response.data.body.access_token : '');
+                        if (!decodedTokenRef.current) {
+                            return <div>Loading...</div>;
+                          }
+                        const userId = decodedToken?.id;
+                        const userEmail = decodedToken?.email;
+                        console.log('Decoded token:', decodedToken);
+                        console.log('User ID:', userId);
+                        console.log('User Email:', userEmail);
+                        localStorage.setItem('userId', rememberMe ?userId : '');
+                        setInformation({...information,_id:userId})
+                    }
                     console.log(`${sign} successful!`, response.data);
                     const successMessage = sign === 'SIGN UP'
                     ? 'Signup successful! Please check your email for verification.'
@@ -112,17 +98,34 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
                     icon: 'success',
                     timer: 10000,
                   });
-                    setIsSubmitting(true); 
+                    
                     setIsFormCleared(true);
                     setShowSign(false);
-                    handleNav(true);
-                   
                     if(sign === "LOGIN"){
+                        // try {
+                        //     const emailVer = await axios.get(`${API_BASE_URL}/auth/verify/${token}`, {
+                        //         headers: { 'Content-Type': 'application/json' },
+                        //         });
+                        //     console.log(emailVer);
+                        //     Swal.fire({
+                        //         title: response.data.message,
+                        //         icon: 'success',
+                        //         timer: 10000,
+                        //     });
+                        //     setShowSign(false);
+                        // } catch (error) {
+                        //     Swal.fire({
+                        //         icon: "error",
+                        //         title: "Oops...",
+                        //         text:  error.response.data.message ,
+                        // });
+                        // }
+                        handleNav(true);
                         navigate('/home');
-                        setInformation({...information,username:formData.username,email:formData.email})
-                       }
-                       else{
-                        setinfoPage(true)
+                    }
+                    else{
+                   
+                        setinfoPage(true);
                         const rightNow = new Date().toISOString();
                         const formattedJoiningDate = rightNow.substring(0, rightNow.length - 1) + '106Z';
                         setInformation({...information,username:formData.username,email:formData.email,joiningDate:formattedJoiningDate})
@@ -156,30 +159,36 @@ const Login = ({ setShowSign, sign, handleSign,setinfoPage,handleNav,information
         setLoading(false); 
         }
     };
-
+    useEffect(() => {
+        decodedTokenRef.current = decodedToken;
+    }, [decodedToken]);
     useEffect(() => {
         setIsFormCleared(false);
-        // setformData({username:'',email:'',password:'',confirmPassword:''})
-    }, []);
-
-    useEffect(() => {
-    //   const storedToken = localStorage.getItem('authToken');
-    //   if (storedToken) {
-    //     const fetchData = async () => {
-    //       try {
-    //         const response = await axios.get('/api/auth/me', {
-    //           headers: {
-    //             Authorization: `Bearer ${storedToken}`,
-    //           },
-    //         });
-    //       } catch (error) {
-    //         console.error('Authentication error:', error);
-    //         localStorage.removeItem('authToken');
-    //       }
-    //     };
-  
-    //     fetchData();
-    //   }
+        const storedToken = localStorage.getItem('authToken');
+        const userId = localStorage.getItem('userId');
+    
+        const handleLoginRedirect = async () => {
+        if (storedToken) {
+            try {
+                const response = await axios.get(`${API_BASE_URL}/users/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${storedToken}`,
+                    },
+                });
+    
+            console.log(response.data.body[0]);
+            setInformation({...information,...response.data.body[0]});
+            handleNav(true);
+            navigate('/home')
+            } catch (error) {
+            console.error('Authentication error:', error);
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userId');
+            }
+        }
+        };
+    
+        handleLoginRedirect(); 
     }, []);
 
     const handleCaptchaChange = (value) => {
