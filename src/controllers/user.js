@@ -17,8 +17,7 @@ export const getAllUsers = async (req, res, next) => {
 export const getUserById = async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const id = req.userId;
-    const user = await userService.getUserById(userId, id);
+    const user = await userService.getUserById(userId);
 
     return res.status(200).json({
       message: "User fetched successfully",

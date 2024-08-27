@@ -4,9 +4,11 @@ export const createProject = async (req, res, next) => {
     try {
 
         const projectData = req.body;
-        const ownerID = req.userId;
+        const image = req.image ? req.image.buffer : null;
+        const video = req.video ? req.video.buffer : null;
+        const ownerID = req.userId;;
 
-        const project = await projectServices.createProject(projectData, ownerID);
+        const project = await projectServices.createProject(projectData, ownerID, image, video);
 
         return res.status(200).json({
             message: "Project created successfully!",

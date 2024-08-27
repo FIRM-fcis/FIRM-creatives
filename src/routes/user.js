@@ -8,7 +8,7 @@ const router = Router();
 router.get("/", authorize, userController.getAllUsers);
 
 // route to get a user by id
-router.get("/:userId", authorize, userController.getUserById);
+router.get("/:userId", userController.getUserById);
 
 // route to follow a user
 router.post("/follow/:followingId", authorize, userController.followUser);
