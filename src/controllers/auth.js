@@ -23,7 +23,7 @@ export const loginUser = async (req, res, next) => {
         return res.status(200).json({
             message: "User logged in successfully",
             body: {
-                "access-token": token,
+                "access_token": token,
             },
             status: 200,
         });
