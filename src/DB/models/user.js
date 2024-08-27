@@ -71,6 +71,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  resume: {
+    type: String,
+    default: null,
+  },
 });
 
 // Create a model for the user schema
