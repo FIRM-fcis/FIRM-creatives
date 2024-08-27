@@ -142,7 +142,7 @@ export const loginUser = async (userData) => {
         email: foundUser.email,
     });
 
-    return token;
+    return { token, userId: foundUser._id };
 };
 
 export const verifyEmail = async (token) => {

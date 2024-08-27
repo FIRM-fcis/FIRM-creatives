@@ -2,16 +2,14 @@ import Project from "../DB/models/project.js";
 import User from "../DB/models/user.js";
 import { createCustomError } from "../middlewares/errors/customError.js";
 import { v4 as uuid } from "uuid";
-import uploadFile from "../utils/multer.js";
 const ProjectPrefix = 'PROJECT'
 
-export const createProject = async (projectData, ownerID, image, video) => {
+export const createProject = async (projectData, ownerID) => {
     const projectID = `${ProjectPrefix}-${uuid()}`;
-    const { images, videos, ...rest } = projectData;
 
     // check if the project already exists
     const foundProject = await Project.findOne({
-        ...rest,
+        ...projectData,
     });
 
     if (foundProject) {
@@ -19,26 +17,11 @@ export const createProject = async (projectData, ownerID, image, video) => {
     }
 
     // create a new project
-    const project = new Project({
-        ...rest,
+    const project = await Project.create({
         projectID,
         ownerID,
-        images: [],
-        videos: [],
+        ...projectData
     });
-
-    // check if the image and video files are provided
-    if (image) {
-        const imageResult = await uploadFile(image);
-        project.images.push(imageResult.secure_url);
-    }
-
-    if (video) {
-        const videoResult = await uploadFile(video);
-        project.videos.push(videoResult.secure_url);
-    }
-
-    await project.save();
 
     return project;
 }

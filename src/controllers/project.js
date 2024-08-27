@@ -1,12 +1,14 @@
 import * as projectServices from "../services/project.js";
+import uploadToCloud from "../utils/cloudinary.js";
 
 export const createProject = async (req, res, next) => {
     try {
-
         const projectData = req.body;
-        const image = req.image ? req.image.buffer : null;
-        const video = req.video ? req.video.buffer : null;
-        const ownerID = req.userId;;
+        const image = req.image?.buffer || null;  // Assuming a single file upload middleware like multer
+        const video = req.video?.buffer || null;  // Assuming a custom video upload handling
+        const ownerID = req.userId;
+
+        console.log(image, video);
 
         const project = await projectServices.createProject(projectData, ownerID, image, video);
 
@@ -15,13 +17,11 @@ export const createProject = async (req, res, next) => {
             body: project,
             status: 200,
         });
-
     } catch (error) {
-
         next(error);
-
     }
 }
+
 
 export const getAllProjects = async (req, res, next) => {
     try {

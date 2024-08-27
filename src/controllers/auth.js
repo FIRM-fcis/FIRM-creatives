@@ -18,12 +18,13 @@ export const signUpUser = async (req, res, next) => {
 export const loginUser = async (req, res, next) => {
     try {
         const userData = req.body;
-        const token = await authService.loginUser(userData);
+        const { token, userId } = await authService.loginUser(userData);
 
         return res.status(200).json({
             message: "User logged in successfully",
             body: {
                 "access_token": token,
+                userId
             },
             status: 200,
         });

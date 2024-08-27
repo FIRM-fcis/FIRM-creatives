@@ -1,18 +1,14 @@
-import cloudinary from './cloudinary.js';
+import multer from "multer";
 
-const uploadFile = (imageBuffer) => {
-    return new Promise((resolve, reject) => {
-        let stream = cloudinary.uploader.upload_stream((error, result) => {
-            if (result) {
-                resolve(result);
-            } else {
-                reject(error);
-            }
-        });
+const storage = multer.diskStorage({
+    // destination: function (req, file, cb) {
+    //     cb(null, "uploads/");
+    // },
+    filename: function (req, file, cb) {
+        cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
+    },
+});
 
-        streamifier.createReadStream(imageBuffer).pipe(stream);
-    });
-};
+const upload = multer({ storage });
 
-
-export default uploadFile;
+export default upload;
