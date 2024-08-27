@@ -16,7 +16,7 @@ router.get("/:projectID", authorize, projectController.getProjectById);
 router.get("/user/:userID", projectController.getProjectByUserID);
 
 // route to create a new project
-router.post("/add", authorize, validate(projectSchemas.createProjectSchema), projectController.createProject);
+router.post("/add", authorize, projectController.createProject);
 
 // route to update project by id
 router.patch("/update/:projectID", authorize, projectController.updateProject);
