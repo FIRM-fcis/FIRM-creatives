@@ -103,37 +103,31 @@ export const unfollowUser = async (followingId, followerId) => {
 };
 
 export const updateProfile = async (userId, userData) => {
-  // check if the userId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
+  // Check if the userId is valid and it is 24 character hex string, 12 byte Uint8Array, or an integer
   if (userId.length !== 24 && !(userId instanceof Uint8Array) && isNaN(userId)) {
     throw createCustomError("Invalid user id", 400, null);
   }
 
-  // check if the userId is existed
-  const user = await User.find({ _id: userId });
+  // Check if the userId exists
+  const user = await User.findOne({ _id: userId }); // Changed find() to findOne() to get a single user
 
   if (!user) {
     throw createCustomError("User not found", 404, null);
   }
 
-  // separate links from the userData
-  const { links, ...restUserData } = userData;
+  // Separate links from the userData
+  let { links = [], ...restUserData } = userData;
 
-  console.log("restUserData", restUserData);
-  console.log("links", links);
+  // Create a set for unique links
+  const LinksSet = new Set(user.links.map(link => JSON.stringify(link)));
 
-  // update the user data
-  await User.updateOne({ _id: userId }, { ...restUserData });
+  links.forEach(link => {
+    LinksSet.add(JSON.stringify(link));
+  });
 
-  // check if the upcoming links does not exist in the user document
-  if (!links) {
-    // update the links data
-    return;
-  }
+  // Convert the set back to an array of objects
+  links = Array.from(LinksSet).map(linkStr => JSON.parse(linkStr));
 
-  await User.updateOne({ _id: userId }, { $addToSet: { links: { $each: links } } });
-
-  // return the updated user data
-
-
-
+  // Update the user profile
+  const updatedUser = await User.updateOne({ _id: userId }, { ...restUserData, links });
 };

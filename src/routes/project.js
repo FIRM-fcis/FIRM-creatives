@@ -1,9 +1,6 @@
 import { Router } from "express";
 import * as projectController from "../controllers/project.js";
 import authorize from "../middlewares/authorize.js";
-import validate from "../middlewares/validators/validate.js";
-import * as projectSchemas from "../middlewares/validators/schemas/project.js";
-
 const router = Router();
 
 // route to get all projects
