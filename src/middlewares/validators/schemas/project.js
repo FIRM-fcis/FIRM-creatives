@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 export const createProjectSchema = Joi.object({
-    title: Joi.string().min(3).max(30).required().messages({
+    title: Joi.string().min(3).max(30).optional().messages({
         'string.base': 'Title must be a string',
         'string.empty': 'Title cannot be empty',
         'string.min': 'Title must be at least 3 characters',

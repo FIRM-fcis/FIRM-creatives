@@ -115,6 +115,25 @@ export const updateProfile = async (userId, userData) => {
     throw createCustomError("User not found", 404, null);
   }
 
-  // update the user profile
-  await User.updateOne({ _id: userId }, { ...userData });
+  // separate links from the userData
+  const { links, ...restUserData } = userData;
+
+  console.log("restUserData", restUserData);
+  console.log("links", links);
+
+  // update the user data
+  await User.updateOne({ _id: userId }, { ...restUserData });
+
+  // check if the upcoming links does not exist in the user document
+  if (!links) {
+    // update the links data
+    return;
+  }
+
+  await User.updateOne({ _id: userId }, { $addToSet: { links: { $each: links } } });
+
+  // return the updated user data
+
+
+
 };
