@@ -1,27 +1,48 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./AddContent.css";
 import { handelFunctions } from "../../Shares/handelInputs";
-import handelApi from '../../Shares/handelApiCalls'
+import handelApi from "../../Shares/handelApiCalls";
 import { AppContext } from "../../Providers/AppProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const AddContent = ({ project, setProject, projectid }) => {
   const { token } = useContext(AppContext);
-  // setToken("")
+  const navigate = useNavigate();
   const handelSave = () => {
     if (project.title && project.ownerID) {
-      handelApi.postData("projects/add", project, token);
+      handelApi.postData("projects/add", project, token, navigate);
     } else {
-      console.log("invalid");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: !project.title
+          ? "Project must has title!"
+          : "You are not the owner of this project",
+      });
     }
   };
   const handelUpdata = () => {
-    if (project.title && project.ownerID) {      
-      handelApi.patchData("projects/update", project,projectid, token);
+    if (project.title && project.ownerID) {
+      handelApi.patchData(
+        "projects/update",
+        project,
+        projectid,
+        token,
+        navigate
+      );
     } else {
-      console.log("invalid");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: !project.title
+          ? "Project must has title!"
+          : "You are not the owner of this project",
+      });
     }
   };
-  console.log(project);
-
+  const handelDelete = async () => {
+    handelApi.deleteProject("projects", projectid, token, navigate);
+  };
   return (
     <div className="sidebar">
       <div className="section-title">Add Content</div>
@@ -34,7 +55,7 @@ const AddContent = ({ project, setProject, projectid }) => {
             accept="image/*"
             className="d-none"
             onChange={(event) =>
-              handelFunctions.ImageUpload(event, setProject, project)
+              handelFunctions.ImageUpload(event, setProject, project, token)
             }
           />
         </label>
@@ -47,7 +68,7 @@ const AddContent = ({ project, setProject, projectid }) => {
             accept="video/*"
             className="d-none"
             onChange={(event) =>
-              handelFunctions.VideoUpload(event, setProject, project)
+              handelFunctions.VideoUpload(event, setProject, project,token)
             }
           />
         </label>
@@ -84,9 +105,18 @@ const AddContent = ({ project, setProject, projectid }) => {
           <span>Tags</span>
         </label>
         {projectid === "newProject" ? (
-          <button onClick={handelSave}>Save</button>
+          <button className="btn custom-btn" onClick={handelSave}>
+            Save
+          </button>
         ) : (
-          <button onClick={handelUpdata}>Updata</button>
+          <>
+            <button className="btn custom-btn" onClick={handelUpdata}>
+              Updata
+            </button>
+            <button className="btn custom-btn" onClick={handelDelete}>
+              Delete
+            </button>
+          </>
         )}
       </div>
     </div>

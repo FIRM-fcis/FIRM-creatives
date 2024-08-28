@@ -1,40 +1,58 @@
 import Swal from "sweetalert2";
+import handelApi from "./handelApiCalls";
+import { useContext } from "react";
+import { AppContext } from "../Providers/AppProvider";
 
 export const handelFunctions = {
-  ImageUpload: (event, setProject, project) => {
+  ImageUpload: async (event, setProject, project, token) => {
     const file = event.target.files[0];
     if (!file) return;
 
-    const newImagesArray = [
-      ...(project.images || []),
-      URL.createObjectURL(file),
-    ];
+    const formData = new FormData();
+    formData.append("file", file); // "file" is the key the server will use to access the file
+
+    // Call API
+    const { url } = await handelApi.postData("files/upload", formData, token);
+
+    // Now you can use the returned `url`
+
+    const newImagesArray = [...(project.images || []), url];
     setProject((prevProject) => ({ ...prevProject, images: newImagesArray }));
   },
 
-  VideoUpload: (event, func, project) => {
+  VideoUpload: async (event, func, project, token) => {
     const file = event.target.files[0];
     if (!file) return;
-    const newVideoArray = [
-      ...(project.videos || []),
-      URL.createObjectURL(file),
-    ];
+
+    const formData = new FormData();
+    formData.append("file", file); // "file" is the key the server will use to access the file
+
+    // Call API
+    const { url } = await handelApi.postData("files/upload", formData, token);
+
+    // Now you can use the returned `url`
+
+    const newVideoArray = [...(project.videos || []), url];
     func({ ...project, videos: newVideoArray });
     // Additional processing can be done here
   },
 
-  TitleChange: async (func, project) => {
-    const { value: text } = await Swal.fire({
+  TitleChange: async (setProject, project, handleSave, navigate) => {
+    const { value: text, isDismissed } = await Swal.fire({
       input: "textarea",
-      inputLabel: "Title",
+      inputLabel: "Project Title",
       inputPlaceholder: "Type your project title here...",
       inputAttributes: {
         "aria-label": "Type your message here",
       },
       showCancelButton: true,
     });
-    if (text) {
-      func({ ...project, title: text });
+    if (isDismissed) {
+      navigate("/home");
+    } else if (text) {
+      const tmpProject = { ...project, title: text };
+      await setProject(tmpProject);
+      handleSave(tmpProject);
     }
   },
 
@@ -84,24 +102,30 @@ export const handelFunctions = {
       func((prevProject) => ({ ...prevProject, tags: newTagsArray }));
     }
   },
-  handleImageChange: (event, setImage,info,setinfo,flag) => {
+  handleImageChange: async (event, setImage, info, setinfo, flag, token) => {
     const files = event.target.files;
 
     if (files && files.length > 0) {
       const file = files[0];
+      if (!file) return;
 
+      const formData = new FormData();
+      formData.append("file", file); // "file" is the key the server will use to access the file
+
+      // Call API
+      const { url } = await handelApi.postData("files/upload", formData, token);
+
+      // Now you can use the returned `url`
       if (file instanceof File) {
         const reader = new FileReader();
 
         reader.onload = () => {
-          setImage(reader.result);
-          if(flag===true){
-            setinfo({...info,bannerPicture:reader.result})
+          setImage(url);
+          if (flag === true) {
+            setinfo({ ...info, bannerPicture: reader.result });
+          } else {
+            setinfo({ ...info, profilePicture: reader.result });
           }
-          else{
-            setinfo({...info,profilePicture:reader.result})
-          }
-          
         };
 
         reader.readAsDataURL(file);
@@ -111,5 +135,5 @@ export const handelFunctions = {
     } else {
       console.error("No file selected");
     }
-  }
+  },
 };

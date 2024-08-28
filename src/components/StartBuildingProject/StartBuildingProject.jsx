@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./StartBuildingProject.css";
 import { handelFunctions } from "../../Shares/handelInputs";
+import { AppContext } from "../../Providers/AppProvider";
 const StartBuildingProject = ({ project, setProject }) => {
-  console.log(project);
-  
+  const {token} = useContext(AppContext)
   return (
     <div className="d-flex-center flex-column window-height">
-      <p className="display-6 py-2">Start building your project:</p>
+      <p className="display-6 py-2">Start building {project.title}:</p>
       <div className="d-flex justify-content-around align-items-center py-5 gap-4">
         <div>
           <label className="cursor-pointer">
@@ -17,7 +17,7 @@ const StartBuildingProject = ({ project, setProject }) => {
               accept="image/*"
               className="d-none"
               onChange={(event) =>
-                handelFunctions.ImageUpload(event, setProject, project)
+                handelFunctions.ImageUpload(event, setProject, project, token)
               }
             />
           </label>
@@ -31,7 +31,7 @@ const StartBuildingProject = ({ project, setProject }) => {
               accept="video/*"
               className="d-none"
               onChange={(event) =>
-                handelFunctions.VideoUpload(event, setProject, project)
+                handelFunctions.VideoUpload(event, setProject, project, token)
               }
             />
           </label>

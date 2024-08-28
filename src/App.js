@@ -116,7 +116,7 @@ const App = () => {
             }
           >
             <Route index element={<Navigate replace to="projects" />} />
-            <Route path="projects" element={<Home />} />
+            <Route path="projects" element={<ProjectManger />} />
             <Route
               path="editProile"
               element={
@@ -128,6 +128,10 @@ const App = () => {
             />
             <Route path="logout" element={<Logout handleNav={handleNav} />} />
           </Route>
+          <Route
+            path="/projectEdit/:projectId"
+            element={<AddOrEdditProject />}
+          />
           <Route path="*" element={<PageNotFound nav={nav} />} />
         </Routes>
       </div>

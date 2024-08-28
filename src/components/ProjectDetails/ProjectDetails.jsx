@@ -1,21 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ProjectDetails.css";
+import { AppContext } from "../../Providers/AppProvider";
+import handelApi from "../../Shares/handelApiCalls";
 
 function ProjectDetails({ project, trigger, setTrigger }) {
-   const [isFullscreen, setIsFullscreen] = useState(false);
-   const [currentImage, setCurrentImage] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
 
-   const openFullscreen = (image) => {
-     setCurrentImage(image);
-     setIsFullscreen(true);
-   };
+  const [user,setUser] = useState();
+  const  {token} = useContext(AppContext)
+  useEffect(()=>{
+    const fetchData = async () => {
+      const data = await handelApi.getUserByID("users",project.ownerID,token);
+      setUser(data);
+    };
+    fetchData();
+  },[trigger])
+  const openFullscreen = (image) => {
+    setCurrentImage(image);
+    setIsFullscreen(true);
+  };
 
-   const closeFullscreen = () => {
-     setIsFullscreen(false);
-     setCurrentImage(null);
-   };
-    return trigger ? (
-    <div className="project-details-popup" >
+  const closeFullscreen = () => {
+    setIsFullscreen(false);
+    setCurrentImage(null);
+  };
+  return trigger ? (
+    <div className="project-details-popup">
       <div
         className="close-details-btn hover-color-change"
         onClick={() => {
@@ -27,15 +38,19 @@ function ProjectDetails({ project, trigger, setTrigger }) {
       <div className="project-content">
         <div className="user-details-info">
           <img
-            src="https://mir-s3-cdn-cf.behance.net/user/276/88e55b141620731.62c2f433692c8.jpg"
+            src={user?.profilePicture}
             alt="User"
             className="user-details-img"
           />
           <div>
             <p className="username-details m-0">{project.title}</p>
             <div className="d-flex align-items-center">
-              <p className="m-0">mohamed essam</p>
-              <button className="btn">Follow</button>
+              <p className="m-0">{user?.username}</p>
+              {project.ownerID !== user?._id ? (
+                <button className="btn">Follow</button>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
