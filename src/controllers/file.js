@@ -4,9 +4,15 @@ import cloudinary from "../utils/cloudinary.js";
 export const uploadFile = (req, res, next) => {
     upload.single("file")(req, res, (err) => {
         if (err) {
-            console.log(err.message);
+            let errorMessage = err.message;
+
+            // Check for size limit error
+            if (err.code === 'LIMIT_FILE_SIZE') {
+                errorMessage = 'File is too large. Maximum size is 50 MB.';
+            }
+
             return res.status(400).json({
-                message: err.message,
+                message: errorMessage,
                 body: null,
                 status: 400
             });
