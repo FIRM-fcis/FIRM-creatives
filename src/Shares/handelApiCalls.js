@@ -14,27 +14,36 @@ const handelApi = {
     return data.body ? data.body : data.message;
   },
   postData: async (endpoint, data, storedToken) => {
-    console.log(data);
-    
     try {
       const response = await axios.post(`${baseUrl}${endpoint}`, data, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },
       });
+      
       if (response.status === 200 || response.status === 201) {
-        Swal.fire({
-          title: "project created !",
-          icon: "success",
-          timer: 10000,
-        });        
-        return response.data.body;
-      } else {
-        throw new Error(response.statusText || "Network response was not ok");
-      }
-    } catch (error) {
-      console.error("Authentication error:", error);
+        if (endpoint.includes("add"))
+          Swal.fire({
+        title: "project created !",
+        icon: "success",
+        timer: 10000,
+      });
+      return response.data.body;
+    } else {
+      throw new Error(response.data.message || "Network response was not ok");
     }
+  } catch (error) {
+    
+    // console.info(error);
+    //   console.error("Authentication error:", error);
+      Swal.fire({
+        title: error.response.data.message,
+        icon: "error",
+        timer: 10000,
+      });
+      return null;
+    }
+    
   },
   getProjectById: async (endpoint, id, token) => {
     console.log(`${baseUrl}${endpoint}/${id}`);
@@ -146,7 +155,6 @@ const handelApi = {
       // localStorage.removeItem('userId');
     }
   },
-
 };
 
 export default handelApi;

@@ -7,9 +7,12 @@ import { AppContext } from "../../Providers/AppProvider";
 import { useParams } from "react-router-dom";
 import handelApi from "../../Shares/handelApiCalls";
 import TitleInput from "../../components/AddContent/TitleInput";
+import Loading from "../../components/Loading";
 const AddOrEdditProject = () => {
   const { token, information } = useContext(AppContext);
   const projectId = useParams();
+  const [loading, setLoading] = useState(false);
+
   const [project, setProject] = useState({
     title: "",
     ownerID: information._id,
@@ -19,7 +22,7 @@ const AddOrEdditProject = () => {
     openToBeSaved: true,
     images: [],
     videos: [],
-    id:""
+    id: "",
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +39,7 @@ const AddOrEdditProject = () => {
   }, []);
   return (
     <>
+      {loading ? <Loading /> : <></>}
       {projectId.projectId === "newProject" ? (
         <TitleInput project={project} setProject={setProject} />
       ) : (
@@ -53,6 +57,7 @@ const AddOrEdditProject = () => {
                   <StartBuildingProject
                     project={project}
                     setProject={setProject}
+                    setLoading={setLoading}
                   />
                 )}
               </div>
@@ -62,6 +67,7 @@ const AddOrEdditProject = () => {
                 project={project}
                 setProject={setProject}
                 projectid={projectId.projectId}
+                setLoading={setLoading}
               />
             </div>
           </div>

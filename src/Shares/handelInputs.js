@@ -3,37 +3,36 @@ import handelApi from "./handelApiCalls";
 import { useContext } from "react";
 import { AppContext } from "../Providers/AppProvider";
 
+const uploadFile = async (event, token, setLoading) => {
+  setLoading(true);
+  const file = event.target.files[0];
+  if (!file) {
+    setLoading(false);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file); // "file" is the key the server will use to access the file
+
+  const data = await handelApi.postData("files/upload", formData, token);
+  setLoading(false);
+  return data ? data.url : null;
+};
 export const handelFunctions = {
-  ImageUpload: async (event, setProject, project, token) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("file", file); // "file" is the key the server will use to access the file
-
-    // Call API
-    const { url } = await handelApi.postData("files/upload", formData, token);
-
-    // Now you can use the returned `url`
-
-    const newImagesArray = [...(project.images || []), url];
-    setProject((prevProject) => ({ ...prevProject, images: newImagesArray }));
+  ImageUpload: async (event, setProject, project, token, setLoading) => {
+    const url = await uploadFile(event, token, setLoading);
+    if (url) {
+      const newImagesArray = [...(project.images || []), url];
+      setProject((prevProject) => ({ ...prevProject, images: newImagesArray }));
+    }
   },
 
-  VideoUpload: async (event, func, project, token) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("file", file); // "file" is the key the server will use to access the file
-
-    // Call API
-    const { url } = await handelApi.postData("files/upload", formData, token);
-
-    // Now you can use the returned `url`
-
-    const newVideoArray = [...(project.videos || []), url];
-    func({ ...project, videos: newVideoArray });
+  VideoUpload: async (event, func, project, token, setLoading) => {
+    const url = await uploadFile(event, token, setLoading);
+    if (url) {
+      const newVideoArray = [...(project.videos || []), url];
+      func({ ...project, videos: newVideoArray });
+    }
     // Additional processing can be done here
   },
 
@@ -102,25 +101,29 @@ export const handelFunctions = {
       func((prevProject) => ({ ...prevProject, tags: newTagsArray }));
     }
   },
-  handleImageChange: async (event, setImage, info, setinfo, flag, token) => {
+  handleImageChange: async (
+    event,
+    setImage,
+    info,
+    setinfo,
+    flag,
+    token,
+    setLoading
+  ) => {
     const files = event.target.files;
 
     if (files && files.length > 0) {
       const file = files[0];
       if (!file) return;
 
-      const formData = new FormData();
-      formData.append("file", file); // "file" is the key the server will use to access the file
-
-      // Call API
-      const { url } = await handelApi.postData("files/upload", formData, token);
+      const url = await uploadFile(event, token, setLoading);
 
       // Now you can use the returned `url`
       if (file instanceof File) {
         const reader = new FileReader();
 
         reader.onload = () => {
-          setImage(url);
+          if (url) setImage(url);
           if (flag === true) {
             setinfo({ ...info, bannerPicture: reader.result });
           } else {

@@ -16,8 +16,17 @@
     height: 100%;
     cursor: default;
   }
-  
-  
+  .spiner{
+    color: var(--second-color);
+    width: 70px;
+    height: 70px;
+    top: 45%;
+    left: 45%;
+    position: fixed;
+  }
+  .z-200{
+    z-index: 200;
+  }
   .t-center{
     text-align: center;
   }
@@ -44,7 +53,9 @@
   .hover-color-change:hover {
     color: var(--second-color) !important;
   }
-  
+  .bg-overlay-color{
+    background-color: var(--overlay-color);
+  }
   .main-color {
     color: var(--main-color) !important;
   }
@@ -52,7 +63,7 @@
   .bg-main-color {
     background-color: var(--main-color) !important;
   }
-  
+
   .second-color {
     color: var(--second-color) !important;
   }

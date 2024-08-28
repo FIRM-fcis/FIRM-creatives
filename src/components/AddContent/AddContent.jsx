@@ -5,7 +5,7 @@ import handelApi from "../../Shares/handelApiCalls";
 import { AppContext } from "../../Providers/AppProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-const AddContent = ({ project, setProject, projectid }) => {
+const AddContent = ({ project, setProject, projectid,setLoading }) => {
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
   const handelSave = () => {
@@ -55,7 +55,13 @@ const AddContent = ({ project, setProject, projectid }) => {
             accept="image/*"
             className="d-none"
             onChange={(event) =>
-              handelFunctions.ImageUpload(event, setProject, project, token)
+              handelFunctions.ImageUpload(
+                event,
+                setProject,
+                project,
+                token,
+                setLoading
+              )
             }
           />
         </label>
@@ -68,7 +74,7 @@ const AddContent = ({ project, setProject, projectid }) => {
             accept="video/*"
             className="d-none"
             onChange={(event) =>
-              handelFunctions.VideoUpload(event, setProject, project,token)
+              handelFunctions.VideoUpload(event, setProject, project, token,setLoading)
             }
           />
         </label>

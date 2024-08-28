@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import "./StartBuildingProject.css";
 import { handelFunctions } from "../../Shares/handelInputs";
 import { AppContext } from "../../Providers/AppProvider";
-const StartBuildingProject = ({ project, setProject }) => {
-  const {token} = useContext(AppContext)
+const StartBuildingProject = ({ project, setProject, setLoading }) => {
+  const { token } = useContext(AppContext);
   return (
     <div className="d-flex-center flex-column window-height">
       <p className="display-6 py-2">Start building {project.title}:</p>
@@ -17,7 +17,13 @@ const StartBuildingProject = ({ project, setProject }) => {
               accept="image/*"
               className="d-none"
               onChange={(event) =>
-                handelFunctions.ImageUpload(event, setProject, project, token)
+                handelFunctions.ImageUpload(
+                  event,
+                  setProject,
+                  project,
+                  token,
+                  setLoading
+                )
               }
             />
           </label>
@@ -31,7 +37,13 @@ const StartBuildingProject = ({ project, setProject }) => {
               accept="video/*"
               className="d-none"
               onChange={(event) =>
-                handelFunctions.VideoUpload(event, setProject, project, token)
+                handelFunctions.VideoUpload(
+                  event,
+                  setProject,
+                  project,
+                  token,
+                  setLoading
+                )
               }
             />
           </label>
