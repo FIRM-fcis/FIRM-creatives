@@ -1,0 +1,8 @@
+[submodule "Back-End"]
+	path = Back-End
+	url = https://github.com/FIRM-fcis/FIRM-creatives.git
+	branch = back-end
+[submodule "Front-End"]
+	path = Front-End
+	url = https://github.com/FIRM-fcis/FIRM-creatives.git
+	branch = front-end
