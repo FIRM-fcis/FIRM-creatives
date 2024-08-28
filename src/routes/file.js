@@ -5,6 +5,6 @@ import authorize from '../middlewares/authorize.js';
 const router = Router();
 
 // route to upload a file
-router.post('/upload', authorize, uploadController.uploadFile);
+router.post('/upload', uploadController.uploadFile);
 
 export default router;
