@@ -1,13 +1,14 @@
 import upload from "../utils/multer.js";
 import cloudinary from "../utils/cloudinary.js";
 
-export const uploadFile = (req, res) => {
+export const uploadFile = (req, res, next) => {
     upload.single("file")(req, res, (err) => {
         if (err) {
             console.log(err.message);
             return res.status(400).json({
-                success: false,
-                message: err.message  // Return the specific error message
+                message: err.message,
+                body: null,
+                status: 400
             });
         }
 
@@ -16,8 +17,9 @@ export const uploadFile = (req, res) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
-                    success: false,
-                    message: "Cloudinary upload error"
+                    message: "Upload failed!",
+                    body: null,
+                    status: 500
                 });
             }
 
