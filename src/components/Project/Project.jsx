@@ -22,11 +22,15 @@ const Project = ({ project }) => {
       />
       <div className="py-2 project col-12 col-sm-6 col-md-4 col-lg-3 cursor-pointer">
         <div className="project-container">
-          {project.ownerID === information._id ? <div className="position-absolute z-3" onClick={handelEdit}>
-            <i className="fa-solid fa-pen-to-square mx-2 my-2"></i>
-          </div>:<></>}
+          {project.ownerID === information._id ? (
+            <div className="position-absolute z-3" onClick={handelEdit}>
+              <i className="fa-solid fa-pen-to-square mx-2 my-2"></i>
+            </div>
+          ) : (
+            <></>
+          )}
           <div
-            className="project-bg-image position-absolute z-1"
+            className="project-bg-image position-absolute z-1 object-fit-cover"
             style={{ backgroundImage: `url(${project.images[0]})` }}
           />
           <div
@@ -39,7 +43,11 @@ const Project = ({ project }) => {
               <p className="m-0">{project.userName}</p>
             </div>
             <div className="d-flex-center gap-1">
-              {project.ownerID !== information._id ?<i class="fa-solid fa-heart text-white"></i>:<></>}
+              {project.ownerID !== information._id ? (
+                <i className="fa-solid fa-heart text-white"></i>
+              ) : (
+                <></>
+              )}
               <p className="m-0">{project.likes}</p>
             </div>
           </div>

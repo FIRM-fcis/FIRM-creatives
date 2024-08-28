@@ -26,8 +26,8 @@
 }
 
 .fullscreen-image {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 90%;
 }
 /* Central div to contain project details */
 .project-content {
@@ -85,8 +85,8 @@
 
 .project-image,
 .project-video {
-  width: 100%;
-  margin-bottom: 0;
+  width:50%;
+  margin:0 auto;
 }
 
 .save-btn {

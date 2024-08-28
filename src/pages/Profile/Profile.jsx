@@ -7,6 +7,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { handelFunctions } from "../../Shares/handelInputs";
 import { AppContext } from "../../Providers/AppProvider";
 import handelApi from "../../Shares/handelApiCalls";
+import Loading from "../../components/Loading";
 const Profile = ({
   profilePicture,
   setProfilePicture,
@@ -14,6 +15,7 @@ const Profile = ({
   setInformation,
 }) => {
   const { setProjects, token } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
   // setProjects([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +24,8 @@ const Profile = ({
     };
     fetchData();
   }, []);
-  const [selectedBannerImage, setSelectedBannerImage] = useState(null);
+
+  const [selectedBannerImage, setSelectedBannerImage] = useState(information.bannerPicture);
   const bannerFileInputRef = useRef(null);
   const profileFileInputRef = useRef(null);
   const activeStyle = ({ isActive }) => {
@@ -46,7 +49,8 @@ const Profile = ({
       information,
       setInformation,
       true,
-      token
+      token,
+      setLoading
     );
   };
 
@@ -57,7 +61,8 @@ const Profile = ({
       information,
       setInformation,
       false,
-      token
+      token,
+      setLoading
     );
   };
   // useEffect(() => {
@@ -67,6 +72,7 @@ const Profile = ({
   return (
     <div className="profile">
       <div className="profile-top">
+        {loading ? <Loading /> : <></>}
         <div className="banner-image" onClick={handleBannerImageClick}>
           {selectedBannerImage ? (
             <img

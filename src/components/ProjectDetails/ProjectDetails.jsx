@@ -7,15 +7,21 @@ function ProjectDetails({ project, trigger, setTrigger }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
 
-  const [user,setUser] = useState();
-  const  {token} = useContext(AppContext)
-  useEffect(()=>{
+  const [user, setUser] = useState();
+  const { token } = useContext(AppContext);
+  useEffect(() => {
     const fetchData = async () => {
-      const data = await handelApi.getUserByID("users",project.ownerID,token);
-      setUser(data);
+      if (project.ownerID) {
+        const data = await handelApi.getUserByID(
+          "users",
+          project.ownerID,
+          token
+        );
+        setUser(data);
+      }
     };
     fetchData();
-  },[trigger])
+  }, [trigger]);
   const openFullscreen = (image) => {
     setCurrentImage(image);
     setIsFullscreen(true);
@@ -33,7 +39,7 @@ function ProjectDetails({ project, trigger, setTrigger }) {
           setTrigger(false);
         }}
       >
-        <i class="fa-solid fa-xmark"></i>
+        <i className="fa-solid fa-xmark"></i>
       </div>
       <div className="project-content">
         <div className="user-details-info">

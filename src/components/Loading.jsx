@@ -7,7 +7,7 @@ function Loading() {
         className="spinner-border fs-1 spiner"
         role="status"
       >
-        <span class="visually-hidden">Loading...</span>
+        <span className="visually-hidden">Loading...</span>
       </div>
     </div>
   );

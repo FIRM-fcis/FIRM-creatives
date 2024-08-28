@@ -10,7 +10,7 @@ const StartBuildingProject = ({ project, setProject, setLoading }) => {
       <div className="d-flex justify-content-around align-items-center py-5 gap-4">
         <div>
           <label className="cursor-pointer">
-            <i class="fa-solid fa-image p-4 rounded-circle hover-input cursor-pointer"></i>
+            <i className="fa-solid fa-image p-4 rounded-circle hover-input cursor-pointer"></i>
             <p className="m-0">Image</p>
             <input
               type="file"
@@ -30,7 +30,7 @@ const StartBuildingProject = ({ project, setProject, setLoading }) => {
         </div>
         <div>
           <label className="cursor-pointer">
-            <i class="fa-solid fa-video p-4 rounded-circle hover-input cursor-pointer"></i>
+            <i className="fa-solid fa-video p-4 rounded-circle hover-input cursor-pointer"></i>
             <p className="m-0">Video</p>
             <input
               type="file"
@@ -53,7 +53,7 @@ const StartBuildingProject = ({ project, setProject, setLoading }) => {
             className="cursor-pointer"
             onClick={() => handelFunctions.TitleChange(setProject, project)}
           >
-            <i class="fa-solid fa-heading p-4 rounded-circle hover-input cursor-pointer"></i>
+            <i className="fa-solid fa-heading p-4 rounded-circle hover-input cursor-pointer"></i>
             <p className="m-0">Title</p>
           </label>
         </div>
@@ -64,7 +64,7 @@ const StartBuildingProject = ({ project, setProject, setLoading }) => {
               handelFunctions.DescriptionChange(setProject, project)
             }
           >
-            <i class="fa-solid fa-note-sticky p-4 rounded-circle hover-input cursor-pointer"></i>
+            <i className="fa-solid fa-note-sticky p-4 rounded-circle hover-input cursor-pointer"></i>
             <p className="m-0">Description</p>
           </label>
         </div>
@@ -73,7 +73,7 @@ const StartBuildingProject = ({ project, setProject, setLoading }) => {
             className="cursor-pointer"
             onClick={() => handelFunctions.ToolsChange(setProject, project)}
           >
-            <i class="fa-solid fa-gear p-4 rounded-circle hover-input cursor-pointer"></i>
+            <i className="fa-solid fa-gear p-4 rounded-circle hover-input cursor-pointer"></i>
             <p className="m-0">Tools</p>
           </label>
         </div>
@@ -82,7 +82,7 @@ const StartBuildingProject = ({ project, setProject, setLoading }) => {
             className="cursor-pointer"
             onClick={() => handelFunctions.TagsChange(setProject, project)}
           >
-            <i class="fa-solid fa-tags p-4 rounded-circle hover-input cursor-pointer"></i>
+            <i className="fa-solid fa-tags p-4 rounded-circle hover-input cursor-pointer"></i>
             <p className="m-0">Tags</p>
           </label>
         </div>

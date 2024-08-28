@@ -13,7 +13,7 @@ const ProjectManger = () => {
           <div className="row ">
             {/* need to filter projects based on recommended posts or the creatives users ar fllow comes from API */}
             {projects.map((project, index) => (
-              <Project project={project} />
+              <Project project={project} key={index}/>
             ))}
           </div>
         </div>

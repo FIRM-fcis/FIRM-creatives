@@ -9,7 +9,6 @@ const handelApi = {
   getData: async (endpoint, parameters = "") => {
     const res = await fetch(`${baseUrl}${endpoint}${parameters}`);
     const data = await res.json();
-    console.log(data);
 
     return data.body ? data.body : data.message;
   },
@@ -46,8 +45,6 @@ const handelApi = {
     
   },
   getProjectById: async (endpoint, id, token) => {
-    console.log(`${baseUrl}${endpoint}/${id}`);
-    console.log(token);
     //  const res = await axios({
     //    url: `${baseUrl}${endpoint}/${id}`,
     //    method: "get",
@@ -94,7 +91,6 @@ const handelApi = {
         },
       });
 
-      console.log(response);
       return response.data.body[0];
     } catch (error) {
       console.error("Authentication error:", error);

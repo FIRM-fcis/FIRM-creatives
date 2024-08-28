@@ -8,7 +8,6 @@ import handelApi from "../../Shares/handelApiCalls";
 const Home = () => {
   const {setProjects} = useContext(AppContext)
    useEffect(() => {
-    console.log("home"); 
      const fetchData = async () => {
        const data = await handelApi.getData("projects?page=4&limit=4");
        setProjects(data);

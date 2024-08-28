@@ -10,25 +10,25 @@ const Footer = () => {
           <div className="col-12 col-md-4">
             <h1 className="display-1 text-center main-color FIRM">FIRM</h1>
             <div className="social-media-links d-flex justify-content-around py-4 fs-2">
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-brands fa-facebook" />
               </a>
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-brands fa-linkedin" />
               </a>
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-brands fa-instagram" />
               </a>
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-brands fa-github" />
               </a>
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-brands fa-discord" />
               </a>
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-brands fa-youtube" />
               </a>
-              <a href className="main-color hover-color-change">
+              <a href="#" className="main-color hover-color-change">
                 <i className="fa-solid fa-envelope" />
               </a>
             </div>
